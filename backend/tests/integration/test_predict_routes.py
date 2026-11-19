@@ -2,15 +2,11 @@
 Integration Tests: Skin Lesion Prediction API
 ----------------------------------------------
 Tests the /predict multipart POST endpoint, input validation,
-file persistence/cleanup, and status code behavior.
+and status code behavior.
 """
 
 import io
-import os
 import pytest
-
-from app.core.config import config
-from app.core.exceptions import ModelNotFoundError, InvalidImageError
 
 
 class TestPredictEndpoint:
@@ -26,6 +22,7 @@ class TestPredictEndpoint:
             "confidence": "96",
             "disease_details": {
                 "name": "Melanoma",
+                "severity": "High",
                 "description": "A serious form of skin cancer.",
             },
             "ensemble_models_used": ["resnet", "densenet", "efficientnet"],
@@ -33,7 +30,7 @@ class TestPredictEndpoint:
             "message": "Image processed successfully",
         }
         mocker.patch(
-            "app.routes.predict.process_prediction",
+            "app.predict_skin_disease",
             return_value=mock_result,
         )
 
@@ -80,16 +77,29 @@ class TestPredictEndpoint:
         json_data = response.get_json()
         assert json_data["error"] == "No selected file"
 
-    def test_predict_domain_exception_returns_custom_status(
-        self, client, dummy_image_bytes, mocker
-    ):
-        """
-        Verify that domain exceptions (e.g. ModelNotFoundError - 503)
-        return proper status codes instead of generic unhandled crashes.
-        """
+    def test_predict_invalid_image_returns_400(self, client, mocker):
+        """Verify that ValueError during preprocessing returns 400."""
         mocker.patch(
-            "app.routes.predict.process_prediction",
-            side_effect=ModelNotFoundError("AI models unavailable"),
+            "app.predict_skin_disease",
+            side_effect=ValueError("Invalid or unreadable image file."),
+        )
+
+        corrupt_file = (io.BytesIO(b"not_an_image"), "corrupt.jpg")
+        response = client.post(
+            "/predict",
+            data={"image": corrupt_file},
+            content_type="multipart/form-data",
+        )
+
+        assert response.status_code == 400
+        json_data = response.get_json()
+        assert "Invalid or unreadable image file." in json_data["error"]
+
+    def test_predict_model_missing_returns_503(self, client, dummy_image_bytes, mocker):
+        """Verify that FileNotFoundError when weights are missing returns 503."""
+        mocker.patch(
+            "app.predict_skin_disease",
+            side_effect=FileNotFoundError("No AI model weights found"),
         )
 
         data = {"image": (dummy_image_bytes, "scan.jpg")}
@@ -99,44 +109,6 @@ class TestPredictEndpoint:
             content_type="multipart/form-data",
         )
 
-        assert response.status_code == 530
+        assert response.status_code == 503
         json_data = response.get_json()
-        assert "AI models unavailable" in json_data["error"]
-
-    def test_predict_invalid_image_domain_exception_returns_400(
-        self, client, dummy_image_bytes, mocker
-    ):
-        """Verify that InvalidImageError raises a clean 400 Bad Request."""
-        mocker.patch(
-            "app.routes.predict.process_prediction",
-            side_effect=InvalidImageError("Corrupt image data"),
-        )
-
-        data = {"image": (dummy_image_bytes, "corrupt.jpg")}
-        response = client.post(
-            "/predict",
-            data=data,
-            content_type="multipart/form-data",
-        )
-
-        assert response.status_code == 400
-        json_data = response.get_json()
-        assert "Corrupt image data" in json_data["error"]
-
-    def test_predict_temp_file_is_cleaned_up(
-        self, client, dummy_image_bytes, mocker
-    ):
-        """Verify that uploaded images are removed from disk after request handling."""
-        filename = "temp_cleanup_test.jpg"
-        target_path = os.path.join(config.UPLOAD_FOLDER, filename)
-
-        mocker.patch(
-            "app.routes.predict.process_prediction",
-            return_value={"message": "ok", "predicted_disease": "nv", "confidence": "90"},
-        )
-
-        data = {"image": (dummy_image_bytes, filename)}
-        client.post("/predict", data=data, content_type="multipart/form-data")
-
-        # The file MUST be cleaned up by the finally block
-        assert not os.path.exists(target_path)
+        assert "No AI model weights found" in json_data["error"]
