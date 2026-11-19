@@ -36,7 +36,7 @@ jobs:
         env:
           PYTHONPATH: backend
         run: |
-          pytest backend/tests --cov=backend/app --cov-report=term-missing --cov-fail-under=80
+          pytest backend/tests --cov=backend/app --cov=backend/predictor --cov=backend/constants --cov-report=term-missing --cov-fail-under=80
 
   frontend-test:
     name: Frontend Tests & Build
