@@ -1,65 +1,73 @@
 """
-Unit Tests: Real TFLite Engine & Memory Diagnostics
----------------------------------------------------
-Tests TensorFlow Lite Interpreter execution, probability outputs,
-memory profiling, and error handling.
+Unit Tests: TFLite Inference & Ensemble Logic
+---------------------------------------------
+Tests prediction, soft-voting fusion, and single TFLite execution.
 """
 
 import os
+import cv2
 import numpy as np
 import pytest
 
-from app.core.config import config
-from app.services.prediction_service import (
-    run_single_model_inference,
-    get_memory_usage_mb,
+from constants import SKIN_DISEASE_CLASSES, USER_FRIENDLY_MAPPING
+from predictor import (
+    predict_skin_disease,
+    get_model_directory,
+    run_single_tflite_model,
 )
 
 
-class TestTFLiteEngineAndDiagnostics:
-    """Tests TFLite interpreter allocation, inference, and memory monitors."""
+class TestTFLiteEnsemble:
+    """Tests ensemble fusion logic and model output formatting."""
 
-    def test_get_memory_usage_mb_returns_positive_float(self):
-        """Verify that get_memory_usage_mb returns a valid positive float representing RAM."""
-        ram_mb = get_memory_usage_mb()
+    def test_model_directory_resolution(self):
+        """Verify model directory resolves to an existing path."""
+        model_dir = get_model_directory()
+        assert model_dir is not None
 
-        assert isinstance(ram_mb, (int, float))
-        assert ram_mb > 0.0
+    def test_constants_mapping_integrity(self):
+        """Verify all 7 disease classes have corresponding friendly metadata."""
+        for code in SKIN_DISEASE_CLASSES:
+            assert code in USER_FRIENDLY_MAPPING
+            details = USER_FRIENDLY_MAPPING[code]
+            assert "name" in details
+            assert "severity" in details
+            assert "description" in details
 
-    def test_real_tflite_inference_if_model_exists(self):
-        """
-        Verify that real TFLite flatbuffers on disk execute properly,
-        allocating tensors and returning a 7-class normalized probability vector.
-        """
-        # Look for local densenet121.tflite (smallest model ~8MB)
-        candidate_paths = [
-            os.path.join(config.MODEL_DIR, "densenet121.tflite"),
-            os.path.join(config.MODEL_DIR, "efficientnetb3.tflite"),
-            os.path.join(config.MODEL_DIR, "resnet101.tflite"),
-        ]
+    def test_predict_skin_disease_mocked_models(self, mocker):
+        """Test complete ensemble pipeline with mocked TFLite runs to test voting."""
+        mocker.patch(
+            "predictor.get_model_directory",
+            return_value="/mock/models"
+        )
+        mocker.patch(
+            "os.path.exists",
+            return_value=True
+        )
 
-        model_path = next((p for p in candidate_paths if os.path.exists(p)), None)
+        mock_pred = np.array([0.1, 0.7, 0.05, 0.05, 0.05, 0.03, 0.02])
+        mocker.patch(
+            "predictor.run_single_tflite_model",
+            return_value=mock_pred
+        )
 
-        if not model_path:
-            pytest.skip("No local .tflite model files present on disk to execute real inference.")
+        img = np.zeros((224, 224, 3), dtype=np.uint8)
+        _, enc = cv2.imencode(".jpg", img)
 
-        # Create dummy 4D input tensor (1, 224, 224, 3)
-        dummy_tensor = np.zeros((1, 224, 224, 3), dtype=np.float32)
+        res = predict_skin_disease(enc.tobytes(), "test_mock.jpg")
+        assert res["predicted_disease"] == "bcc"
+        assert res["confidence"] == "70"
+        assert len(res["ensemble_models_used"]) == 3
+        assert res["filename"] == "test_mock.jpg"
 
-        # Execute real inference
-        probabilities = run_single_model_inference("densenet", model_path, dummy_tensor)
+    def test_predict_skin_disease_no_models_raises_error(self, mocker):
+        """Test that missing all models raises FileNotFoundError."""
+        mocker.patch(
+            "os.path.exists",
+            return_value=False
+        )
+        img = np.zeros((224, 224, 3), dtype=np.uint8)
+        _, enc = cv2.imencode(".jpg", img)
 
-        # Output validations
-        assert isinstance(probabilities, np.ndarray)
-        assert probabilities.shape == (7,)
-        assert all(0.0 <= p <= 1.0 for p in probabilities)
-        # Probabilities should sum to approximately 1.0
-        assert np.isclose(np.sum(probabilities), 1.0, atol=1e-2)
-
-    def test_run_single_model_inference_invalid_path_raises_error(self):
-        """Verify that an invalid model file path raises an exception and cleans up."""
-        dummy_tensor = np.zeros((1, 224, 224, 3), dtype=np.float32)
-
-        with pytest.raises(Exception):
-            run_single_model_inference("fake_model", "invalid_path.tflite", dummy_tensor)
-
+        with pytest.raises(FileNotFoundError):
+            predict_skin_disease(enc.tobytes(), "test.jpg")
