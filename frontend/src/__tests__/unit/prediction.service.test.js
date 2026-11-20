@@ -37,13 +37,14 @@ describe('predictionService Unit Tests', () => {
     expect(result.data.predicted_disease).toBe('nv');
   });
 
-  test('propagates rejection on API error', async () => {
+  test('propagates rejection on API error when retries exhausted', async () => {
     const networkError = new Error('Network Error');
-    axiosInstance.post.mockRejectedValueOnce(networkError);
+    axiosInstance.post.mockRejectedValue(networkError);
 
     const formData = new FormData();
 
-    await expect(predictionService.predict(formData)).rejects.toThrow('Network Error');
+    await expect(predictionService.predict(formData, 0, 0)).rejects.toThrow('Network Error');
+    expect(axiosInstance.post).toHaveBeenCalledTimes(3); // 1 initial + 2 retries
   });
 });
 
