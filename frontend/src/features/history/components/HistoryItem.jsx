@@ -2,8 +2,15 @@ import React from 'react';
 import { FiClock, FiTrash2 } from 'react-icons/fi';
 import { formatDate, getCategoryClass } from '../utils/formatters';
 
+const CATEGORY_BADGE_CLASSES = {
+  malignant: 'bg-red-500/15 text-red-500 border-red-500/30',
+  precancerous: 'bg-amber-500/15 text-amber-500 border-amber-500/30',
+  benign: 'bg-emerald-500/15 text-emerald-500 border-emerald-500/30',
+};
+
 export const HistoryItem = ({ item, onDelete }) => {
   const category = getCategoryClass(item.predicted_disease);
+  const badgeClass = CATEGORY_BADGE_CLASSES[category] || CATEGORY_BADGE_CLASSES.benign;
 
   return (
     <div
@@ -15,13 +22,7 @@ export const HistoryItem = ({ item, onDelete }) => {
             {item.disease_details?.name || item.predicted_disease}
           </span>
           <span
-            className={`text-[0.65rem] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider border ${
-              category === 'malignant'
-                ? 'bg-red-500/15 text-red-500 border-red-500/30'
-                : category === 'precancerous'
-                ? 'bg-amber-500/15 text-amber-500 border-amber-500/30'
-                : 'bg-emerald-500/15 text-emerald-500 border-emerald-500/30'
-            }`}
+            className={`text-[0.65rem] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider border ${badgeClass}`}
           >
             {category}
           </span>

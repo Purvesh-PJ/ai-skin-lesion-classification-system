@@ -26,7 +26,7 @@ export const historyService = {
     if (!predictionResult) return null;
 
     const record = {
-      _id: 'scan_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+      _id: `scan_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
       predicted_disease: predictionResult.predicted_disease || 'Unknown',
       confidence: predictionResult.confidence || '95',
       disease_details: predictionResult.disease_details || {

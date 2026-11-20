@@ -49,6 +49,30 @@ export const HistoryList = ({ refreshTrigger }) => {
     }
   };
 
+  const renderContent = () => {
+    if (loading && history.length === 0) {
+      return (
+        <div className="flex justify-center p-6">
+          <Spinner size="md" />
+        </div>
+      );
+    }
+    if (history.length === 0) {
+      return <HistoryEmptyState />;
+    }
+    return (
+      <div className="flex flex-col gap-2 max-h-[480px] overflow-y-auto pr-1">
+        {history.map((item) => (
+          <HistoryItem
+            key={item._id}
+            item={item}
+            onDelete={handleDelete}
+          />
+        ))}
+      </div>
+    );
+  };
+
   return (
     <div className="flex flex-col gap-3 w-full">
       <HistoryHeader
@@ -58,23 +82,7 @@ export const HistoryList = ({ refreshTrigger }) => {
         onClearAll={handleClearAll}
       />
 
-      {loading && history.length === 0 ? (
-        <div className="flex justify-center p-6">
-          <Spinner size="md" />
-        </div>
-      ) : history.length === 0 ? (
-        <HistoryEmptyState />
-      ) : (
-        <div className="flex flex-col gap-2 max-h-[480px] overflow-y-auto pr-1">
-          {history.map((item) => (
-            <HistoryItem
-              key={item._id}
-              item={item}
-              onDelete={handleDelete}
-            />
-          ))}
-        </div>
-      )}
+      {renderContent()}
     </div>
   );
 };

@@ -1,12 +1,12 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
+import { FiCheck } from 'react-icons/fi';
 import { Button } from '../Button';
 import { Alert } from '../Alert';
 import { ThemeToggle } from '../ThemeToggle';
 import { SectionHeading } from '../SectionHeading';
 import { Container } from '../Container';
 import { ThemeProvider } from '../../../context/ThemeContext';
-import { FiCheck } from 'react-icons/fi';
 
 describe('UI Components Unit Tests', () => {
   describe('Button Component', () => {

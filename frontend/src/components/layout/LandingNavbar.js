@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FiActivity } from 'react-icons/fi';
 import { Button } from '../ui';
 import ThemeToggle from '../ui/ThemeToggle';
 import { ROUTES } from '../../constants';
-import { FiActivity } from 'react-icons/fi';
 
 const LandingNavbar = () => {
   return (
