@@ -23,10 +23,10 @@ const ResultsCard = ({ predictionResult, loading, error }) => {
         <h4 className="mt-5 font-semibold text-neutral-800 dark:text-neutral-200 text-base m-0">
           {isWakingUp ? 'Warming Up Cloud ML Engine...' : 'Analyzing Skin Lesion...'}
         </h4>
-        <p className="mt-2 text-xs text-neutral-500 dark:text-neutral-400 max-w-xs m-0 leading-relaxed">
+        <p className="mt-1 text-xs text-neutral-400 dark:text-neutral-500 m-0 leading-relaxed">
           {isWakingUp
             ? 'Cloud container is spinning up from idle (~15-20s). Your diagnosis will appear automatically.'
-            : 'Running 3-model deep neural network ensemble consensus'}
+            : 'Running ensemble deep neural network inference'}
         </p>
       </div>
     );
