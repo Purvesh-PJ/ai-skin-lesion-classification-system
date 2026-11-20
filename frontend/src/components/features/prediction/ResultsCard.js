@@ -1,8 +1,11 @@
 import React from 'react';
-import { FiAlertCircle, FiCheckCircle, FiShield, FiFileText } from 'react-icons/fi';
+import { FiAlertCircle, FiCheckCircle, FiShield, FiFileText, FiRefreshCw } from 'react-icons/fi';
 import { Spinner, Badge } from '../../ui';
+import { useBackendStatus } from '../../../context';
 
 const ResultsCard = ({ predictionResult, loading, error }) => {
+  const { isWakingUp } = useBackendStatus();
+
   const getDiseaseName = (result) => {
     return result.disease_details?.name || result.predicted_disease;
   };
@@ -15,32 +18,47 @@ const ResultsCard = ({ predictionResult, loading, error }) => {
 
   if (loading) {
     return (
-      <div className="w-full h-full flex flex-col items-center justify-center text-center p-6">
+      <div className="w-full h-full flex flex-col items-center justify-center text-center p-6 animate-in fade-in">
         <Spinner size="lg" />
-        <h4 className="mt-5 font-semibold text-neutral-700 dark:text-neutral-300 text-base m-0">
-          Analyzing Skin Lesion...
+        <h4 className="mt-5 font-semibold text-neutral-800 dark:text-neutral-200 text-base m-0">
+          {isWakingUp ? 'Warming Up Cloud ML Engine...' : 'Analyzing Skin Lesion...'}
         </h4>
-        <p className="mt-1 text-xs text-neutral-400 dark:text-neutral-500 m-0">
-          Running ensemble deep neural network inference
+        <p className="mt-2 text-xs text-neutral-500 dark:text-neutral-400 max-w-xs m-0 leading-relaxed">
+          {isWakingUp
+            ? 'Cloud container is spinning up from idle (~15-20s). Your diagnosis will appear automatically.'
+            : 'Running 3-model deep neural network ensemble consensus'}
         </p>
       </div>
     );
   }
 
   if (error) {
+    const isNetworkError =
+      error.message === 'Network Error' ||
+      error.code === 'ERR_NETWORK' ||
+      error.code === 'ECONNABORTED';
+
     return (
       <div className="w-full h-full flex flex-col items-center justify-center text-center p-6">
-        <div className="w-16 h-16 rounded-full flex items-center justify-center bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 mb-4 shadow-sm">
-          <FiAlertCircle size={32} />
+        <div
+          className={`w-16 h-16 rounded-full flex items-center justify-center mb-4 shadow-sm border ${
+            isNetworkError
+              ? 'bg-amber-50 dark:bg-amber-950/40 border-amber-200 dark:border-amber-800 text-amber-600 dark:text-amber-400'
+              : 'bg-red-50 dark:bg-red-950/40 border-red-200 dark:border-red-800 text-red-600 dark:text-red-400'
+          }`}
+        >
+          {isNetworkError ? <FiRefreshCw size={28} className="animate-spin" /> : <FiAlertCircle size={32} />}
         </div>
         <h4 className="font-semibold text-neutral-800 dark:text-neutral-200 text-lg m-0">
-          Analysis Failed
+          {isNetworkError ? 'AI Server Starting Up' : 'Analysis Failed'}
         </h4>
         <p className="mt-1.5 text-xs text-neutral-500 dark:text-neutral-400 max-w-xs m-0 leading-relaxed">
-          {error.response?.data?.error ||
-            error.response?.data?.message ||
-            error.message ||
-            'Unable to process image. Please verify backend connectivity and try again.'}
+          {isNetworkError
+            ? 'The cloud ML container is initializing from sleep mode. Please try submitting again in 10-15 seconds.'
+            : error.response?.data?.error ||
+              error.response?.data?.message ||
+              error.message ||
+              'Unable to process image. Please verify backend connectivity and try again.'}
         </p>
       </div>
     );
