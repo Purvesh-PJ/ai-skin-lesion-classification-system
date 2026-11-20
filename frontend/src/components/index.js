@@ -1,5 +1,5 @@
 // Common UI components
-export * from './common/ui';
+export * from './ui';
 
 // Layout components
 export * from './layout';

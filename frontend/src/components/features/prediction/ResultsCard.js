@@ -1,146 +1,40 @@
 import React from 'react';
-import { FiAlertCircle, FiCheckCircle, FiShield, FiFileText, FiRefreshCw } from 'react-icons/fi';
-import { Spinner, Badge } from '../../ui';
 import { useBackendStatus } from '../../../context';
+import {
+  ConfidenceGauge,
+  EnsembleBadges,
+  ConditionSummary,
+  PredictionEmptyState,
+  PredictionLoadingState,
+  PredictionErrorState,
+} from './components';
 
-const ResultsCard = ({ predictionResult, loading, error }) => {
+export const ResultsCard = ({ predictionResult, loading, error }) => {
   const { isWakingUp } = useBackendStatus();
 
-  const getDiseaseName = (result) => {
-    return result.disease_details?.name || result.predicted_disease;
-  };
-
-  const getDescription = (result) => {
-    return result.disease_details?.description || null;
-  };
-
-  const confidenceValue = parseInt(predictionResult?.confidence || '0', 10);
-
   if (loading) {
-    return (
-      <div className="w-full h-full flex flex-col items-center justify-center text-center p-6 animate-in fade-in">
-        <Spinner size="lg" />
-        <h4 className="mt-5 font-semibold text-neutral-800 dark:text-neutral-200 text-base m-0">
-          {isWakingUp ? 'Warming Up Cloud ML Engine...' : 'Analyzing Skin Lesion...'}
-        </h4>
-        <p className="mt-1 text-xs text-neutral-400 dark:text-neutral-500 m-0 leading-relaxed">
-          {isWakingUp
-            ? 'Cloud container is spinning up from idle (~15-20s). Your diagnosis will appear automatically.'
-            : 'Running ensemble deep neural network inference'}
-        </p>
-      </div>
-    );
+    return <PredictionLoadingState isWakingUp={isWakingUp} />;
   }
 
   if (error) {
-    const isNetworkError =
-      error.message === 'Network Error' ||
-      error.code === 'ERR_NETWORK' ||
-      error.code === 'ECONNABORTED';
-
-    return (
-      <div className="w-full h-full flex flex-col items-center justify-center text-center p-6">
-        <div
-          className={`w-16 h-16 rounded-full flex items-center justify-center mb-4 shadow-sm border ${
-            isNetworkError
-              ? 'bg-amber-50 dark:bg-amber-950/40 border-amber-200 dark:border-amber-800 text-amber-600 dark:text-amber-400'
-              : 'bg-red-50 dark:bg-red-950/40 border-red-200 dark:border-red-800 text-red-600 dark:text-red-400'
-          }`}
-        >
-          {isNetworkError ? <FiRefreshCw size={28} className="animate-spin" /> : <FiAlertCircle size={32} />}
-        </div>
-        <h4 className="font-semibold text-neutral-800 dark:text-neutral-200 text-lg m-0">
-          {isNetworkError ? 'AI Server Starting Up' : 'Analysis Failed'}
-        </h4>
-        <p className="mt-1.5 text-xs text-neutral-500 dark:text-neutral-400 max-w-xs m-0 leading-relaxed">
-          {isNetworkError
-            ? 'The cloud ML container is initializing from sleep mode. Please try submitting again in 10-15 seconds.'
-            : error.response?.data?.error ||
-              error.response?.data?.message ||
-              error.message ||
-              'Unable to process image. Please verify backend connectivity and try again.'}
-        </p>
-      </div>
-    );
+    return <PredictionErrorState error={error} />;
   }
 
   if (predictionResult) {
+    const diseaseName = predictionResult.disease_details?.name || predictionResult.predicted_disease;
+    const description = predictionResult.disease_details?.description || null;
+    const confidenceValue = parseInt(predictionResult.confidence || '0', 10);
+
     return (
       <div className="bg-neutral-50 dark:bg-[#181818] border border-neutral-200/80 dark:border-neutral-800/80 rounded-2xl p-6 flex-1 overflow-y-auto flex flex-col gap-4 animate-in fade-in duration-300">
-        {/* Result Header */}
-        <div className="flex items-center gap-3 pb-4 border-b border-neutral-200 dark:border-neutral-800">
-          <div className="w-11 h-11 rounded-full flex items-center justify-center bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400 shrink-0">
-            <FiCheckCircle size={24} />
-          </div>
-          <div>
-            <h3 className="text-xl font-bold text-neutral-900 dark:text-neutral-100 m-0 tracking-tight">
-              {getDiseaseName(predictionResult)}
-            </h3>
-            <span className="text-xs text-neutral-500 dark:text-neutral-400">
-              AI Diagnosis Output
-            </span>
-          </div>
-          <Badge variant="medical" className="ml-auto text-sm font-bold px-3 py-1">
-            {confidenceValue}% Match
-          </Badge>
-        </div>
+        <ConfidenceGauge diseaseName={diseaseName} confidenceValue={confidenceValue} />
 
-        {/* Progress Bar Section */}
-        <div className="flex flex-col gap-2">
-          <div className="flex justify-between items-center text-xs">
-            <span className="font-semibold text-neutral-600 dark:text-neutral-400">
-              Ensemble Confidence Score
-            </span>
-            <span className="font-bold text-emerald-600 dark:text-emerald-400">
-              {confidenceValue}%
-            </span>
-          </div>
-          <div className="w-full h-2 bg-neutral-200 dark:bg-neutral-800 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full transition-all duration-700 ease-out"
-              style={{ width: `${confidenceValue}%` }}
-            />
-          </div>
-        </div>
+        <ConditionSummary description={description} />
 
-        {/* Condition Summary */}
-        {getDescription(predictionResult) && (
-          <div className="p-4 bg-white dark:bg-[#121212] rounded-xl border border-neutral-200/80 dark:border-neutral-800/80">
-            <div className="flex items-center gap-2 text-xs font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
-              <FiFileText size={16} className="text-emerald-600 dark:text-emerald-400" />
-              <span>Condition Summary & Guidance</span>
-            </div>
-            <p className="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed m-0">
-              {getDescription(predictionResult)}
-            </p>
-          </div>
-        )}
-
-        {/* Ensemble Verification Badges */}
-        <div className="p-3.5 bg-white dark:bg-[#121212] rounded-xl border border-neutral-200/80 dark:border-neutral-800/80 flex flex-col gap-2">
-          <div className="flex items-center justify-between">
-            <span className="text-[0.7rem] uppercase font-bold text-neutral-400 dark:text-neutral-500 tracking-wider">
-              Ensemble Consensus Verification
-            </span>
-            <span className="text-[11px] font-medium text-emerald-600 dark:text-emerald-400">
-              3/3 Models Evaluated
-            </span>
-          </div>
-          <div className="flex flex-wrap items-center gap-1.5 pt-1">
-            <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300 border border-blue-200/60 dark:border-blue-800/40">
-              ResNet-101
-            </span>
-            <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-purple-50 text-purple-700 dark:bg-purple-950/40 dark:text-purple-300 border border-purple-200/60 dark:border-purple-800/40">
-              DenseNet-121
-            </span>
-            <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800/40">
-              EfficientNet-B3
-            </span>
-          </div>
-        </div>
+        <EnsembleBadges />
 
         {/* Scan Details */}
-        {predictionResult?.filename && (
+        {predictionResult.filename && (
           <div className="p-3 bg-white dark:bg-[#121212] rounded-xl border border-neutral-200/80 dark:border-neutral-800/80 flex items-center justify-between text-xs">
             <span className="font-medium text-neutral-400 dark:text-neutral-500">
               Analyzed Scan
@@ -154,19 +48,7 @@ const ResultsCard = ({ predictionResult, loading, error }) => {
     );
   }
 
-  return (
-    <div className="w-full h-full flex flex-col items-center justify-center text-center p-6">
-      <div className="w-16 h-16 rounded-full flex items-center justify-center bg-emerald-50/60 dark:bg-emerald-950/20 border border-emerald-200/60 dark:border-emerald-800/30 text-emerald-600 dark:text-emerald-400 mb-4 shadow-sm">
-        <FiShield size={32} />
-      </div>
-      <h4 className="font-semibold text-neutral-800 dark:text-neutral-200 text-lg m-0">
-        No Diagnostic Data
-      </h4>
-      <p className="mt-1.5 text-xs text-neutral-500 dark:text-neutral-400 max-w-xs m-0 leading-relaxed">
-        Upload a skin lesion image on the left panel to execute multi-model ensemble analysis.
-      </p>
-    </div>
-  );
+  return <PredictionEmptyState />;
 };
 
 export default ResultsCard;
