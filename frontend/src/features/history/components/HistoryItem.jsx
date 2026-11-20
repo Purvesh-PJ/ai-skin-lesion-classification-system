@@ -1,5 +1,6 @@
 import React from 'react';
 import { FiClock, FiTrash2 } from 'react-icons/fi';
+import Badge from '../../../components/ui/Badge';
 import Button from '../../../components/ui/Button';
 import { formatDate, getCategoryClass } from '../utils/formatters';
 
@@ -22,11 +23,12 @@ export const HistoryItem = ({ item, onDelete }) => {
           <span className="font-bold text-sm text-neutral-900 dark:text-neutral-100 capitalize">
             {item.disease_details?.name || item.predicted_disease}
           </span>
-          <span
-            className={`text-[0.65rem] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider border ${badgeClass}`}
+          <Badge
+            variant="outline"
+            className={`text-[0.65rem] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${badgeClass}`}
           >
             {category}
-          </span>
+          </Badge>
         </div>
         <div className="flex items-center gap-3 text-xs text-neutral-400 dark:text-neutral-500">
           <span className="flex items-center gap-1">

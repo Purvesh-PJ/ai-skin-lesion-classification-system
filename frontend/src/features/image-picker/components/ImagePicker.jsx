@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FiAlertCircle } from 'react-icons/fi';
+import Alert from '../../../components/ui/Alert';
 import Button from '../../../components/ui/Button';
 import Spinner from '../../../components/ui/Spinner';
 import DropZone from './DropZone';
@@ -133,6 +134,7 @@ export const ImagePicker = ({
         <DropZone onClick={handleTriggerInput} onDrop={handleDrop} />
       )}
 
+      {/* eslint-disable-next-line no-restricted-syntax -- hidden file input requires native input ref */}
       <input
         ref={fileInputRef}
         type="file"
@@ -143,10 +145,10 @@ export const ImagePicker = ({
       />
 
       {coldStartNotice && (
-        <div className="w-full p-2.5 rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/50 flex items-center gap-2 text-xs text-amber-700 dark:text-amber-400 animate-in fade-in">
+        <Alert variant="warning" className="text-xs">
           <FiAlertCircle size={15} className="shrink-0 animate-pulse text-amber-500" />
           <span>Free-tier cloud backend is waking up from idle (~15-20s). Please wait...</span>
-        </div>
+        </Alert>
       )}
 
       <div className="flex items-center gap-3 w-full">

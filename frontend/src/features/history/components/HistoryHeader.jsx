@@ -1,5 +1,6 @@
 import React from 'react';
 import { FiDatabase, FiRefreshCw, FiTrash2 } from 'react-icons/fi';
+import Badge from '../../../components/ui/Badge';
 import Button from '../../../components/ui/Button';
 
 export const HistoryHeader = ({ count, loading, onRefresh, onClearAll }) => {
@@ -10,9 +11,12 @@ export const HistoryHeader = ({ count, loading, onRefresh, onClearAll }) => {
         <h4 className="text-sm font-bold text-neutral-900 dark:text-neutral-100 m-0">
           Diagnostic Scan History
         </h4>
-        <span className="text-xs font-semibold bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 px-2 py-0.5 rounded-full border border-neutral-200 dark:border-neutral-700">
+        <Badge
+          variant="secondary"
+          className="text-xs font-semibold px-2 py-0.5 border border-neutral-200 dark:border-neutral-700"
+        >
           {count} Scans
-        </span>
+        </Badge>
       </div>
 
       <div className="flex items-center gap-1.5">

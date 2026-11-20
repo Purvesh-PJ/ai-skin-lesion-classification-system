@@ -129,6 +129,14 @@
             {
               "selector": "JSXElement[openingElement.name.name='button']",
               "message": "Do not use native <button>. Use design system primitive <Button /> from 'components/ui' instead."
+            },
+            {
+              "selector": "JSXElement[openingElement.name.name='input']",
+              "message": "Do not use native <input>. Use design system primitive <Input /> from 'components/ui' instead."
+            },
+            {
+              "selector": "JSXElement[openingElement.name.name='select']",
+              "message": "Do not use native <select>. Use design system primitive <Dropdown /> from 'components/ui' instead."
             }
           ]
         }
