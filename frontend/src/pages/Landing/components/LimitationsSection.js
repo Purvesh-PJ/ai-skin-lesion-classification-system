@@ -16,10 +16,10 @@ export const LimitationsSection = () => {
         />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 py-6 border-t border-slate-200 dark:border-[#222222]">
-          {PROJECT_LIMITATIONS.map((item, idx) => {
+          {PROJECT_LIMITATIONS.map((item) => {
             const Icon = item.icon;
             return (
-              <div key={idx} className="flex flex-col gap-2">
+              <div key={item.title} className="flex flex-col gap-2">
                 <div className={`${item.iconColorClass} flex items-center gap-2`}>
                   <Icon size={18} />
                   <h4 className="text-base font-bold m-0 text-slate-900 dark:text-slate-100">

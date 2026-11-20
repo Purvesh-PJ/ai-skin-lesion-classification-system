@@ -20,7 +20,7 @@ export const ConditionsSection = () => {
   ];
 
   return (
-    <section id="conditions" className="py-12 sm:py-16">
+    <section id="conditions" data-testid="conditions-section" className="py-12 sm:py-16">
       <Container>
         <SectionHeading
           badge="Diagnostic Scope"

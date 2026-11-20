@@ -17,8 +17,8 @@ export const HowItWorksSection = () => {
 
         {/* 4-Step Process Walkthrough */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 relative">
-          {PIPELINE_STEPS.map((item, idx) => (
-            <div key={idx} className="flex flex-col gap-2.5">
+          {PIPELINE_STEPS.map((item) => (
+            <div key={item.step} className="flex flex-col gap-2.5">
               <div className="text-[0.8125rem] font-extrabold tracking-wider text-green-600 dark:text-green-400 flex items-center gap-2 after:content-[''] after:flex-1 after:h-[1px] after:bg-slate-200 dark:after:bg-[#262626]">
                 {item.step}
               </div>

@@ -26,13 +26,41 @@
     "test": "react-scripts test",
     "test:ci": "react-scripts test --watchAll=false",
     "test:cov": "react-scripts test --watchAll=false --coverage",
+    "lint": "eslint src --ext .js,.jsx",
+    "lint:fix": "eslint src --ext .js,.jsx --fix",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "no-console": [
+        "warn",
+        {
+          "allow": [
+            "warn",
+            "error"
+          ]
+        }
+      ],
+      "no-debugger": "error",
+      "no-var": "error",
+      "prefer-const": "error",
+      "eqeqeq": [
+        "error",
+        "always"
+      ],
+      "react/self-closing-comp": "warn",
+      "react/jsx-boolean-value": [
+        "warn",
+        "never"
+      ],
+      "react/jsx-no-useless-fragment": "warn",
+      "react/no-array-index-key": "warn",
+      "import/no-duplicates": "error"
+    }
   },
   "browserslist": {
     "production": [
