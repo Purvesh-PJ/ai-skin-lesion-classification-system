@@ -13,5 +13,3 @@ export const API_ENDPOINTS = {
   PREDICT: '/predict',
   HEALTH: '/health',
 };
-
-export * from './sampleImages';

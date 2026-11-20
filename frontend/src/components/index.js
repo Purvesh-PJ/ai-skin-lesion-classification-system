@@ -1,8 +1,5 @@
-// Common UI components
-export * from './common/ui';
+// Common shared UI components
+export * from './ui';
 
-// Layout components
+// Shared layout components
 export * from './layout';
-
-// Feature components
-export * from './features/prediction';
