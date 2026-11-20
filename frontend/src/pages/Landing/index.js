@@ -10,7 +10,7 @@ import {
   LimitationsSection,
   LiveDemoCtaSection,
   LandingFooter,
-} from '../../features/landing';
+} from './components';
 
 const Landing = () => {
   const ctaRoute = ROUTES.DASHBOARD;
