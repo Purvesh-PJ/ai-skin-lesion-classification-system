@@ -14,8 +14,13 @@ import time
 import logging
 import warnings
 import numpy as np
-import tensorflow as tf
 import cv2
+
+# Import lightweight LiteRT interpreter
+try:
+    from ai_edge_litert.interpreter import Interpreter
+except ImportError:
+    from tflite_runtime.interpreter import Interpreter
 
 try:
     from constants import (
@@ -70,15 +75,15 @@ def preprocess_image(image_bytes: bytes, target_size=TARGET_IMAGE_SIZE) -> np.nd
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     image = cv2.resize(image, target_size)
 
-    # EfficientNet-style normalization: map [0, 255] to [-1, 1] or appropriate scale
-    image = tf.keras.applications.efficientnet.preprocess_input(image)
-    image = np.expand_dims(image, axis=0).astype(np.float32)
+    # EfficientNet models trained with standard [0, 255] float RGB inputs
+    image = image.astype(np.float32)
+    image = np.expand_dims(image, axis=0)
     return image
 
 
 def run_single_tflite_model(model_path: str, preprocessed_image: np.ndarray) -> np.ndarray:
     """Executes inference on a single TFLite flatbuffer and cleans up memory immediately."""
-    interpreter = tf.lite.Interpreter(model_path=model_path)
+    interpreter = Interpreter(model_path=model_path)
     try:
         interpreter.allocate_tensors()
         input_details = interpreter.get_input_details()
