@@ -1,10 +1,10 @@
-import sampleNv from '../../../assets/samples/sample_nv.jpg';
-import sampleMel from '../../../assets/samples/sample_mel.jpg';
-import sampleBkl from '../../../assets/samples/sample_bkl.jpg';
-import sampleBcc from '../../../assets/samples/sample_bcc.jpg';
-import sampleAkiec from '../../../assets/samples/sample_akiec.jpg';
-import sampleVasc from '../../../assets/samples/sample_vasc.jpg';
-import sampleDf from '../../../assets/samples/sample_df.jpg';
+import sampleNv from '../assets/samples/sample_nv.jpg';
+import sampleMel from '../assets/samples/sample_mel.jpg';
+import sampleBkl from '../assets/samples/sample_bkl.jpg';
+import sampleBcc from '../assets/samples/sample_bcc.jpg';
+import sampleAkiec from '../assets/samples/sample_akiec.jpg';
+import sampleVasc from '../assets/samples/sample_vasc.jpg';
+import sampleDf from '../assets/samples/sample_df.jpg';
 
 export const SAMPLE_IMAGES = [
   {

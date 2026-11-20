@@ -3,7 +3,7 @@ import { Header } from '../../components/layout';
 import { ImagePicker, SamplePickerRail } from '../../features/image-picker';
 import { ResultsCard } from '../../features/prediction';
 import { HistoryList } from '../../features/history';
-import { useDashboard } from '../../hooks';
+import { useDashboard } from './hooks/useDashboard';
 import { DashboardTabs } from './components';
 
 const Dashboard = () => {
