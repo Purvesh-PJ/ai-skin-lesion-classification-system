@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import ResultsCard from '../../components/features/prediction/ResultsCard';
+import { ResultsCard } from '../../features/prediction';
 
 describe('ResultsCard Unit Tests', () => {
   test('renders empty state when no prediction result is present', () => {

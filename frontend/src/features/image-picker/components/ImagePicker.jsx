@@ -1,39 +1,122 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FiAlertCircle } from 'react-icons/fi';
 import Button from '../../../components/ui/Button';
 import Spinner from '../../../components/ui/Spinner';
 import DropZone from './DropZone';
 import ImagePreview from './ImagePreview';
+import { usePrediction } from '../../prediction/hooks/usePrediction';
 
 export const ImagePicker = ({
   selectedImage,
+  setSelectedImage,
   imageFile,
+  setImageFile,
+  setPredictionResult,
   activeSample,
+  setActiveSample,
   loading,
-  coldStartNotice,
+  setLoading,
+  setError,
+  coldStartNotice: externalColdStartNotice,
   onImageSelected,
   onClear,
   onAnalyze,
 }) => {
-  const fileInputRef = React.useRef(null);
+  const fileInputRef = useRef(null);
+  const [internalColdStart, setInternalColdStart] = useState(false);
+  const { predict } = usePrediction();
+
+  useEffect(() => {
+    let timer;
+    if (loading) {
+      timer = setTimeout(() => {
+        setInternalColdStart(true);
+      }, 3500);
+    } else {
+      setInternalColdStart(false);
+    }
+    return () => clearTimeout(timer);
+  }, [loading]);
+
+  const coldStartNotice =
+    externalColdStartNotice !== undefined ? externalColdStartNotice : internalColdStart;
+
+  const handleFile = (file) => {
+    if (!file) return;
+    if (onImageSelected) {
+      onImageSelected(file);
+    }
+    if (setSelectedImage) {
+      setSelectedImage(URL.createObjectURL(file));
+    }
+    if (setImageFile) {
+      setImageFile(file);
+    }
+    if (setActiveSample) {
+      setActiveSample(null);
+    }
+    if (setPredictionResult) {
+      setPredictionResult(null);
+    }
+    if (setError) {
+      setError(null);
+    }
+  };
 
   const handleDrop = (e) => {
     e.preventDefault();
-    const file = e.dataTransfer.files[0];
+    const file = e.dataTransfer?.files?.[0];
     if (file && file.type && file.type.startsWith('image/')) {
-      onImageSelected(file);
+      handleFile(file);
     }
   };
 
   const handleFileChange = (e) => {
     if (e.target.files && e.target.files[0]) {
-      onImageSelected(e.target.files[0]);
+      handleFile(e.target.files[0]);
     }
   };
 
   const handleTriggerInput = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
+    }
+  };
+
+  const handleClear = () => {
+    if (onClear) {
+      onClear();
+    }
+    if (setSelectedImage) setSelectedImage(null);
+    if (setImageFile) setImageFile(null);
+    if (setActiveSample) setActiveSample(null);
+    if (setPredictionResult) setPredictionResult(null);
+    if (setError) setError(null);
+    setInternalColdStart(false);
+  };
+
+  const handleUploadClick = async () => {
+    if (onAnalyze) {
+      onAnalyze();
+      return;
+    }
+    if (!imageFile) return;
+
+    if (setLoading) setLoading(true);
+    if (setError) setError(null);
+
+    const formData = new FormData();
+    formData.append('image', imageFile);
+
+    try {
+      const response = await predict(formData);
+      if (response?.data && setPredictionResult) {
+        setPredictionResult(response.data);
+      }
+    } catch (err) {
+      if (setError) setError(err);
+    } finally {
+      if (setLoading) setLoading(false);
     }
   };
 
@@ -71,7 +154,7 @@ export const ImagePicker = ({
           <Button
             variant="outline"
             size="md"
-            onClick={onClear}
+            onClick={handleClear}
             disabled={loading}
             className="flex-1"
           >
@@ -82,7 +165,7 @@ export const ImagePicker = ({
         <Button
           variant="brand"
           size="md"
-          onClick={onAnalyze}
+          onClick={handleUploadClick}
           disabled={!imageFile || loading}
           className="flex-1"
         >

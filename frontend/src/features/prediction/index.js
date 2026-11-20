@@ -5,6 +5,6 @@ export { default as ConditionSummary } from './components/ConditionSummary';
 export { default as PredictionEmptyState } from './components/PredictionEmptyState';
 export { default as PredictionLoadingState } from './components/PredictionLoadingState';
 export { default as PredictionErrorState } from './components/PredictionErrorState';
-export { default as ImageUploadCard } from '../../components/features/prediction/ImageUploadCard';
 export { default as usePrediction } from './hooks/usePrediction';
-export { default as predictionService } from './api/prediction.service';
+export { default as predictionService, predictionService as namedPredictionService } from './api/prediction.service';
+export * from './api/prediction.service';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import ImageUploadCard from '../../components/features/prediction/ImageUploadCard';
+import { ImagePicker as ImageUploadCard } from '../../features/image-picker';
 
 describe('ImageUploadCard Component Unit Tests', () => {
   const defaultProps = {

@@ -1,4 +1,4 @@
-import axiosInstance from '../../../services/api/axios';
+import axiosInstance from '../../../lib/axios';
 import { API_ENDPOINTS } from '../../../constants';
 
 export const predictionService = {

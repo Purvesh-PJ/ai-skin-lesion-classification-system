@@ -1,7 +1,7 @@
-import predictionService from '../../services/api/prediction.service';
-import axiosInstance from '../../services/api/axios';
+import { predictionService } from '../../features/prediction';
+import axiosInstance from '../../lib/axios';
 
-jest.mock('../../services/api/axios', () => ({
+jest.mock('../../lib/axios', () => ({
   post: jest.fn(),
 }));
 

@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
-import { historyService } from '../services';
-import { urlToFile } from '../lib/file.utils';
+import { historyService } from '../features/history';
+import { urlToFile } from '../features/image-picker';
 
 export const useDashboard = () => {
   const [selectedImage, setSelectedImage] = useState(null);

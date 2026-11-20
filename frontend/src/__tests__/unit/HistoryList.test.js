@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import HistoryList from '../../components/features/history/HistoryList';
-import { historyService } from '../../services/api/history.service';
+import { HistoryList, historyService } from '../../features/history';
 
 describe('HistoryList Component Unit Tests', () => {
   beforeEach(() => {

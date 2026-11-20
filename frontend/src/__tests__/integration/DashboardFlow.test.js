@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { Dashboard } from '../../pages';
 import { ThemeProvider } from '../../context/ThemeContext';
-import { historyService } from '../../services/api/history.service';
+import { historyService } from '../../features/history';
 
 describe('Dashboard Flow Integration Tests', () => {
   beforeEach(() => {

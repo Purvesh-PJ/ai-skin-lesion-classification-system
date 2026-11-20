@@ -1,7 +1,7 @@
 import React from 'react';
 import { Header } from '../../components/layout';
-import { SamplePickerRail } from '../../features/image-picker';
-import { ImageUploadCard, ResultsCard } from '../../features/prediction';
+import { ImagePicker, SamplePickerRail } from '../../features/image-picker';
+import { ResultsCard } from '../../features/prediction';
 import { HistoryList } from '../../features/history';
 import { useDashboard } from '../../hooks';
 import { DashboardTabs } from './components';
@@ -36,12 +36,10 @@ const Dashboard = () => {
   return (
     <div key={userUpdateKey} className="flex flex-col h-screen bg-white dark:bg-[#121212] text-neutral-900 dark:text-neutral-100 overflow-hidden lg:h-screen max-lg:h-auto max-lg:overflow-y-auto">
       <Header onUserUpdated={handleUserUpdated} />
-
       <main className="flex-1 grid grid-cols-1 lg:grid-cols-2 w-full m-0 p-0 overflow-hidden max-lg:overflow-visible">
-        {/* Left Column: Image Ingestion (Picker) */}
         <div className="flex flex-col h-full overflow-hidden">
           <div className="flex-1 flex flex-col justify-center items-center px-6 py-4 overflow-y-auto">
-            <ImageUploadCard
+            <ImagePicker
               selectedImage={selectedImage}
               setSelectedImage={setSelectedImage}
               imageFile={imageFile}
@@ -54,29 +52,14 @@ const Dashboard = () => {
               setError={setError}
             />
           </div>
-
-          <SamplePickerRail
-            activeSample={activeSample}
-            onSelectSample={handleSelectSample}
-          />
+          <SamplePickerRail activeSample={activeSample} onSelectSample={handleSelectSample} />
         </div>
 
-        {/* Right Column: Prediction Results & Scan History */}
         <div className="flex flex-col h-full border-l max-lg:border-l-0 max-lg:border-t border-neutral-200/80 dark:border-neutral-800/80 px-6 py-4 overflow-y-auto">
-          <DashboardTabs
-            activeTab={activeTab}
-            onTabChange={setActiveTab}
-            hasScans={hasScans}
-          />
-
+          <DashboardTabs activeTab={activeTab} onTabChange={setActiveTab} hasScans={hasScans} />
           <div className={`h-full flex flex-col ${activeTab === 'analysis' ? 'flex' : 'hidden'}`}>
-            <ResultsCard
-              predictionResult={predictionResult}
-              loading={loading}
-              error={error}
-            />
+            <ResultsCard predictionResult={predictionResult} loading={loading} error={error} />
           </div>
-
           <div className={`h-full flex flex-col ${activeTab === 'history' ? 'flex' : 'hidden'}`}>
             <HistoryList refreshTrigger={historyRefreshKey} />
           </div>

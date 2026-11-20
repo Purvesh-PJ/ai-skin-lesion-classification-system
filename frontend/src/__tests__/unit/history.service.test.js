@@ -1,4 +1,4 @@
-import { historyService } from '../../services/api/history.service';
+import { historyService } from '../../features/history';
 
 describe('historyService Unit Tests', () => {
   beforeEach(() => {

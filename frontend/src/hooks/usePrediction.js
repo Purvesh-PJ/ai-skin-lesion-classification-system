@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { predictionService } from '../services';
+import { predictionService } from '../features/prediction';
 
 const usePrediction = () => {
   const [loading, setLoading] = useState(false);
