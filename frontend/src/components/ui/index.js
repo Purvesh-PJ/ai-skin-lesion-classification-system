@@ -14,3 +14,5 @@ export {
   DropdownMenuSeparator,
 } from './Dropdown';
 export { default as ThemeToggle } from './ThemeToggle';
+export { default as SectionHeading } from './SectionHeading';
+export { default as Container } from './Container';
