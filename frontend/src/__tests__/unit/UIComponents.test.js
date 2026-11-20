@@ -3,7 +3,10 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { Button } from '../../components/ui/Button';
 import { Alert } from '../../components/ui/Alert';
 import { ThemeToggle } from '../../components/ui/ThemeToggle';
+import { SectionHeading } from '../../components/ui/SectionHeading';
+import { Container } from '../../components/ui/Container';
 import { ThemeProvider } from '../../context/ThemeContext';
+import { FiCheck } from 'react-icons/fi';
 
 describe('UI Components Unit Tests', () => {
   describe('Button Component', () => {
@@ -56,6 +59,55 @@ describe('UI Components Unit Tests', () => {
     });
   });
 
+  describe('SectionHeading Component', () => {
+    test('renders badge, title and description', () => {
+      render(
+        <SectionHeading
+          badge="Features"
+          badgeIcon={FiCheck}
+          title="Section Header"
+          description="A helpful description"
+        />
+      );
+      expect(screen.getByText('Features')).toBeInTheDocument();
+      expect(screen.getByText('Section Header')).toBeInTheDocument();
+      expect(screen.getByText('A helpful description')).toBeInTheDocument();
+    });
+
+    test('supports left alignment and custom classes', () => {
+      const { container } = render(
+        <SectionHeading
+          title="Left Heading"
+          align="left"
+          className="custom-heading"
+        />
+      );
+      expect(container.firstChild.className).toContain('text-left');
+      expect(container.firstChild.className).toContain('custom-heading');
+    });
+  });
+
+  describe('Container Component', () => {
+    test('renders children within container bounds', () => {
+      render(
+        <Container size="default">
+          <span>Container content</span>
+        </Container>
+      );
+      expect(screen.getByText('Container content')).toBeInTheDocument();
+    });
+
+    test('supports custom polymorphic tag', () => {
+      const { container } = render(
+        <Container as="section" size="lg">
+          <p>Section wrapped</p>
+        </Container>
+      );
+      expect(container.querySelector('section')).toBeInTheDocument();
+      expect(container.firstChild.className).toContain('max-w-[1240px]');
+    });
+  });
+
   describe('ThemeToggle Component', () => {
     test('toggles theme when clicked', () => {
       render(
@@ -73,4 +125,3 @@ describe('UI Components Unit Tests', () => {
     });
   });
 });
-
