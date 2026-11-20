@@ -1,5 +1,6 @@
 import React from 'react';
 import { FiClock, FiTrash2 } from 'react-icons/fi';
+import Button from '../../../components/ui/Button';
 import { formatDate, getCategoryClass } from '../utils/formatters';
 
 const CATEGORY_BADGE_CLASSES = {
@@ -49,13 +50,15 @@ export const HistoryItem = ({ item, onDelete }) => {
         </span>
       </div>
 
-      <button
+      <Button
+        variant="ghost"
+        size="icon"
         onClick={(e) => onDelete(item._id, e)}
         title="Delete scan record"
-        className="p-1.5 rounded-lg text-neutral-400 hover:text-red-500 hover:bg-red-500/10 transition-colors bg-transparent border-none cursor-pointer"
+        className="h-7 w-7 text-neutral-400 hover:text-red-500 hover:bg-red-500/10"
       >
         <FiTrash2 size={15} />
-      </button>
+      </Button>
     </div>
   );
 };

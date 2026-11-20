@@ -111,7 +111,29 @@
           "newlines-between": "ignore"
         }
       ]
-    }
+    },
+    "overrides": [
+      {
+        "files": [
+          "src/**/*.js",
+          "src/**/*.jsx"
+        ],
+        "excludedFiles": [
+          "src/components/ui/**",
+          "src/**/__tests__/**",
+          "src/setupTests.js"
+        ],
+        "rules": {
+          "no-restricted-syntax": [
+            "warn",
+            {
+              "selector": "JSXElement[openingElement.name.name='button']",
+              "message": "Do not use native <button>. Use design system primitive <Button /> from 'components/ui' instead."
+            }
+          ]
+        }
+      }
+    ]
   },
   "browserslist": {
     "production": [

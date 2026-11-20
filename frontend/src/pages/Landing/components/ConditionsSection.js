@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FiCheckCircle } from 'react-icons/fi';
+import Button from '../../../components/ui/Button';
 import SectionHeading from '../../../components/ui/SectionHeading';
 import Container from '../../../components/ui/Container';
 import { ALL_CONDITIONS } from '../constants/landingData';
@@ -32,10 +33,11 @@ export const ConditionsSection = () => {
         {/* Minimalist Filter Tabs */}
         <div className="flex items-center gap-2 mb-6 flex-wrap">
           {filterTabs.map((tab) => (
-            <button
+            <Button
               key={tab.id}
+              size="sm"
               onClick={() => setSelectedFilter(tab.id)}
-              className={`px-4 py-2 rounded-full text-[0.825rem] font-semibold transition-colors flex items-center gap-1.5 border ${
+              className={`h-auto px-4 py-2 rounded-full text-[0.825rem] font-semibold transition-colors flex items-center gap-1.5 border ${
                 selectedFilter === tab.id
                   ? 'bg-green-600 text-white border-green-600'
                   : 'bg-transparent text-slate-600 dark:text-slate-400 border-slate-200 dark:border-[#262626] hover:bg-slate-100 dark:hover:bg-white/5 hover:text-slate-900 dark:hover:text-slate-100'
@@ -43,7 +45,7 @@ export const ConditionsSection = () => {
             >
               {tab.bulletColor && <span className={tab.bulletColor}>●</span>}
               {tab.label}
-            </button>
+            </Button>
           ))}
         </div>
 
