@@ -1,9 +1,10 @@
 import React from 'react';
 import { Header } from '../../components/layout';
-import { ImageUploadCard, ResultsCard } from '../../components/features/prediction';
-import HistoryList from '../../components/features/history/HistoryList';
+import { SamplePickerRail } from '../../features/image-picker';
+import { ImageUploadCard, ResultsCard } from '../../features/prediction';
+import { HistoryList } from '../../features/history';
 import { useDashboard } from '../../hooks';
-import { SamplePickerRail, DashboardTabs } from './components';
+import { DashboardTabs } from './components';
 
 const Dashboard = () => {
   const { state, actions } = useDashboard();
@@ -37,7 +38,7 @@ const Dashboard = () => {
       <Header onUserUpdated={handleUserUpdated} />
 
       <main className="flex-1 grid grid-cols-1 lg:grid-cols-2 w-full m-0 p-0 overflow-hidden max-lg:overflow-visible">
-        {/* Left Column: Image Dropzone & Bottom Sample Rail */}
+        {/* Left Column: Image Ingestion (Picker) */}
         <div className="flex flex-col h-full overflow-hidden">
           <div className="flex-1 flex flex-col justify-center items-center px-6 py-4 overflow-y-auto">
             <ImageUploadCard
@@ -60,7 +61,7 @@ const Dashboard = () => {
           />
         </div>
 
-        {/* Right Column: Analysis Results or History */}
+        {/* Right Column: Prediction Results & Scan History */}
         <div className="flex flex-col h-full border-l max-lg:border-l-0 max-lg:border-t border-neutral-200/80 dark:border-neutral-800/80 px-6 py-4 overflow-y-auto">
           <DashboardTabs
             activeTab={activeTab}
