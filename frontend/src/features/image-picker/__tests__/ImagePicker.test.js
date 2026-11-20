@@ -1,8 +1,8 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import { ImagePicker as ImageUploadCard } from '../../features/image-picker';
+import { render, screen } from '@testing-library/react';
+import { ImagePicker as ImageUploadCard } from '../index';
 
-describe('ImageUploadCard Component Unit Tests', () => {
+describe('ImagePicker Component Unit Tests', () => {
   const defaultProps = {
     selectedImage: null,
     setSelectedImage: jest.fn(),
@@ -58,4 +58,3 @@ describe('ImageUploadCard Component Unit Tests', () => {
     expect(screen.getByText(/Melanoma \(mel\)/i)).toBeInTheDocument();
   });
 });
-

@@ -1,7 +1,7 @@
-import { predictionService } from '../../features/prediction';
-import axiosInstance from '../../lib/axios';
+import { predictionService } from '../index';
+import axiosInstance from '../../../lib/axios';
 
-jest.mock('../../lib/axios', () => ({
+jest.mock('../../../lib/axios', () => ({
   post: jest.fn(),
 }));
 
@@ -47,4 +47,3 @@ describe('predictionService Unit Tests', () => {
     expect(axiosInstance.post).toHaveBeenCalledTimes(3); // 1 initial + 2 retries
   });
 });
-

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { HistoryList, historyService } from '../../features/history';
+import { HistoryList, historyService } from '../index';
 
 describe('HistoryList Component Unit Tests', () => {
   beforeEach(() => {
@@ -76,4 +76,3 @@ describe('HistoryList Component Unit Tests', () => {
     expect(screen.getByText(/No scans recorded yet/i)).toBeInTheDocument();
   });
 });
-

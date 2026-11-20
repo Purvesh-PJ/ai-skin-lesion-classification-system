@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, screen, fireEvent, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import Landing from '../../pages/Landing';
-import { ThemeProvider } from '../../context/ThemeContext';
+import Landing from '../index';
+import { ThemeProvider } from '../../../context/ThemeContext';
 
 describe('Landing Page & Modular Sections Integration', () => {
   const renderLanding = () =>

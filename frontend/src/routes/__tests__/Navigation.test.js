@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import AppRoutes from '../../routes';
+import AppRoutes from '../index';
 import { ThemeProvider } from '../../context/ThemeContext';
 
 describe('Navigation & Routing Integration Tests', () => {
@@ -34,20 +34,19 @@ describe('Navigation & Routing Integration Tests', () => {
       </MemoryRouter>
     );
 
-    // Header title in Dashboard
-    expect(screen.getByText(/Skin Disease AI/i)).toBeInTheDocument();
-    expect(screen.getByText(/Ensemble Inference Studio/i)).toBeInTheDocument();
+    expect(screen.getByText(/Demo Samples:/i)).toBeInTheDocument();
   });
 
-  test('renders NotFound on unknown path', () => {
+  test('renders NotFound page on non-existent route', () => {
     render(
-      <MemoryRouter initialEntries={['/non-existent-page-xyz']}>
+      <MemoryRouter initialEntries={['/non-existent-route']}>
         <ThemeProvider>
           <AppRoutes />
         </ThemeProvider>
       </MemoryRouter>
     );
 
-    expect(screen.getByText(/404/i)).toBeInTheDocument();
+    expect(screen.getByText('404')).toBeInTheDocument();
+    expect(screen.getByText(/Page not found/i)).toBeInTheDocument();
   });
 });

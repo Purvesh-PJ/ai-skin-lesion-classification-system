@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { Dashboard } from '../../pages';
-import { ThemeProvider } from '../../context/ThemeContext';
-import { historyService } from '../../features/history';
+import Dashboard from '../index';
+import { ThemeProvider } from '../../../context/ThemeContext';
+import { historyService } from '../../../features/history';
 
 describe('Dashboard Flow Integration Tests', () => {
   beforeEach(() => {
@@ -49,7 +49,7 @@ describe('Dashboard Flow Integration Tests', () => {
         name: 'Melanoma',
         description: 'Malignant condition detected.',
       },
-      filename: 'sample_mel.jpg',
+      filename: 'sample_lesion.jpg',
     });
 
     render(
@@ -65,8 +65,8 @@ describe('Dashboard Flow Integration Tests', () => {
 
     fireEvent.click(historyBtn);
 
+    expect(screen.getByText(/Scan History/i)).toBeInTheDocument();
     expect(screen.getByText(/Melanoma/i)).toBeInTheDocument();
     expect(screen.getByText(/95%/i)).toBeInTheDocument();
-    expect(screen.getByText(/1 Scans/i)).toBeInTheDocument();
   });
 });

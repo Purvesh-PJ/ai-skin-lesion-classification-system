@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { ResultsCard } from '../../features/prediction';
+import { ResultsCard } from '../index';
 
 describe('ResultsCard Unit Tests', () => {
   test('renders empty state when no prediction result is present', () => {
@@ -60,4 +60,3 @@ describe('ResultsCard Unit Tests', () => {
     expect(screen.getByText(/lesion_scan_01.jpg/i)).toBeInTheDocument();
   });
 });
-

@@ -1,4 +1,4 @@
-import { historyService } from '../../features/history';
+import { historyService } from '../index';
 
 describe('historyService Unit Tests', () => {
   beforeEach(() => {
@@ -77,4 +77,3 @@ describe('historyService Unit Tests', () => {
     expect(historyService.getLocalRecords()).toHaveLength(0);
   });
 });
-
