@@ -6,8 +6,8 @@ gunicorn>=23.0.0
 werkzeug>=3.0.6
 jinja2>=3.1.5
 
-# Inference Engine & Image Preprocessing (Serving Only)
-tensorflow>=2.18.0
+# Inference Engine & Image Preprocessing (Serving Only - Lightweight LiteRT)
+ai-edge-litert>=2.1.2
 numpy>=1.26.4
 opencv-python-headless>=4.10.0.84
 psutil>=5.9.0

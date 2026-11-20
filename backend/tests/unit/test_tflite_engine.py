@@ -71,3 +71,19 @@ class TestTFLiteEnsemble:
 
         with pytest.raises(FileNotFoundError):
             predict_skin_disease(enc.tobytes(), "test.jpg")
+
+    def test_run_single_tflite_model_execution(self, mocker):
+        """Test run_single_tflite_model properly allocates and invokes interpreter."""
+        mock_interpreter = mocker.MagicMock()
+        mock_interpreter.get_input_details.return_value = [{'index': 0}]
+        mock_interpreter.get_output_details.return_value = [{'index': 1}]
+        mock_interpreter.get_tensor.return_value = np.array([[0.1, 0.2, 0.3, 0.4]])
+        
+        mocker.patch("predictor.Interpreter", return_value=mock_interpreter)
+        
+        dummy_tensor = np.zeros((1, 224, 224, 3), dtype=np.float32)
+        res = run_single_tflite_model("/mock/path.tflite", dummy_tensor)
+        
+        assert mock_interpreter.allocate_tensors.called
+        assert mock_interpreter.invoke.called
+        assert np.array_equal(res, np.array([0.1, 0.2, 0.3, 0.4]))
