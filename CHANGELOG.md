@@ -4,14 +4,6 @@ Notable changes to this project, newest first.
 
 ## [Unreleased]
 
-## [3.0.1-test] - 2026-11-22
-
-### Added
-- Automated release pipeline verification test.
-
-### Changed
-- Verified end-to-end changelog extraction and draft publishing.
-
 ## [3.0.0] - 2026-11-21
 
 ### Added

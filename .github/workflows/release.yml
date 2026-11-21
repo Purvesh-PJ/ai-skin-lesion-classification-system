@@ -56,7 +56,7 @@ jobs:
           name: Release ${{ steps.target_tag.outputs.tag }}
           tag_name: ${{ steps.target_tag.outputs.tag }}
           body_path: RELEASE_NOTES.md
-          draft: true
-          prerelease: true
+          draft: false
+          prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
