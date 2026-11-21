@@ -15,7 +15,7 @@ export default defineConfig({
     port: 3000,
   },
   build: {
-    outDir: 'build',
+    outDir: 'dist',
     sourcemap: false,
   },
   envPrefix: ['VITE_', 'REACT_APP_'],
