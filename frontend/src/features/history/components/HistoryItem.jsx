@@ -1,9 +1,18 @@
 import React from 'react';
 import { FiClock, FiTrash2 } from 'react-icons/fi';
+import Badge from '../../../components/ui/Badge';
+import Button from '../../../components/ui/Button';
 import { formatDate, getCategoryClass } from '../utils/formatters';
+
+const CATEGORY_BADGE_CLASSES = {
+  malignant: 'bg-red-500/15 text-red-500 border-red-500/30',
+  precancerous: 'bg-amber-500/15 text-amber-500 border-amber-500/30',
+  benign: 'bg-emerald-500/15 text-emerald-500 border-emerald-500/30',
+};
 
 export const HistoryItem = ({ item, onDelete }) => {
   const category = getCategoryClass(item.predicted_disease);
+  const badgeClass = CATEGORY_BADGE_CLASSES[category] || CATEGORY_BADGE_CLASSES.benign;
 
   return (
     <div
@@ -14,17 +23,12 @@ export const HistoryItem = ({ item, onDelete }) => {
           <span className="font-bold text-sm text-neutral-900 dark:text-neutral-100 capitalize">
             {item.disease_details?.name || item.predicted_disease}
           </span>
-          <span
-            className={`text-[0.65rem] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider border ${
-              category === 'malignant'
-                ? 'bg-red-500/15 text-red-500 border-red-500/30'
-                : category === 'precancerous'
-                ? 'bg-amber-500/15 text-amber-500 border-amber-500/30'
-                : 'bg-emerald-500/15 text-emerald-500 border-emerald-500/30'
-            }`}
+          <Badge
+            variant="outline"
+            className={`text-[0.65rem] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${badgeClass}`}
           >
             {category}
-          </span>
+          </Badge>
         </div>
         <div className="flex items-center gap-3 text-xs text-neutral-400 dark:text-neutral-500">
           <span className="flex items-center gap-1">
@@ -48,13 +52,15 @@ export const HistoryItem = ({ item, onDelete }) => {
         </span>
       </div>
 
-      <button
+      <Button
+        variant="ghost"
+        size="icon"
         onClick={(e) => onDelete(item._id, e)}
         title="Delete scan record"
-        className="p-1.5 rounded-lg text-neutral-400 hover:text-red-500 hover:bg-red-500/10 transition-colors bg-transparent border-none cursor-pointer"
+        className="h-7 w-7 text-neutral-400 hover:text-red-500 hover:bg-red-500/10"
       >
         <FiTrash2 size={15} />
-      </button>
+      </Button>
     </div>
   );
 };

@@ -1,12 +1,12 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
+import { FiCheck } from 'react-icons/fi';
 import { Button } from '../Button';
 import { Alert } from '../Alert';
 import { ThemeToggle } from '../ThemeToggle';
 import { SectionHeading } from '../SectionHeading';
 import { Container } from '../Container';
 import { ThemeProvider } from '../../../context/ThemeContext';
-import { FiCheck } from 'react-icons/fi';
 
 describe('UI Components Unit Tests', () => {
   describe('Button Component', () => {
@@ -75,15 +75,17 @@ describe('UI Components Unit Tests', () => {
     });
 
     test('supports left alignment and custom classes', () => {
-      const { container } = render(
+      render(
         <SectionHeading
           title="Left Heading"
           align="left"
           className="custom-heading"
+          data-testid="left-heading"
         />
       );
-      expect(container.firstChild.className).toContain('text-left');
-      expect(container.firstChild.className).toContain('custom-heading');
+      const headingBox = screen.getByTestId('left-heading');
+      expect(headingBox.className).toContain('text-left');
+      expect(headingBox.className).toContain('custom-heading');
     });
   });
 
@@ -98,13 +100,14 @@ describe('UI Components Unit Tests', () => {
     });
 
     test('supports custom polymorphic tag', () => {
-      const { container } = render(
-        <Container as="section" size="lg">
+      render(
+        <Container as="section" size="lg" data-testid="custom-section">
           <p>Section wrapped</p>
         </Container>
       );
-      expect(container.querySelector('section')).toBeInTheDocument();
-      expect(container.firstChild.className).toContain('max-w-[1240px]');
+      const section = screen.getByTestId('custom-section');
+      expect(section.tagName.toLowerCase()).toBe('section');
+      expect(section.className).toContain('max-w-[1240px]');
     });
   });
 

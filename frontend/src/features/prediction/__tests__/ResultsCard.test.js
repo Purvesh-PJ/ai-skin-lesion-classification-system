@@ -13,7 +13,7 @@ describe('ResultsCard Unit Tests', () => {
   });
 
   test('renders loading state when inference is in progress', () => {
-    render(<ResultsCard predictionResult={null} loading={true} error={null} />);
+    render(<ResultsCard predictionResult={null} loading error={null} />);
 
     expect(screen.getByText(/Analyzing Skin Lesion.../i)).toBeInTheDocument();
     expect(

@@ -1,4 +1,5 @@
 import React from 'react';
+import Badge from '../../../components/ui/Badge';
 
 export const EnsembleBadges = () => {
   return (
@@ -12,15 +13,24 @@ export const EnsembleBadges = () => {
         </span>
       </div>
       <div className="flex flex-wrap items-center gap-1.5 pt-1">
-        <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300 border border-blue-200/60 dark:border-blue-800/40">
+        <Badge
+          variant="outline"
+          className="px-2.5 py-1 text-xs font-semibold bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300 border-blue-200/60 dark:border-blue-800/40"
+        >
           ResNet-101
-        </span>
-        <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-purple-50 text-purple-700 dark:bg-purple-950/40 dark:text-purple-300 border border-purple-200/60 dark:border-purple-800/40">
+        </Badge>
+        <Badge
+          variant="outline"
+          className="px-2.5 py-1 text-xs font-semibold bg-purple-50 text-purple-700 dark:bg-purple-950/40 dark:text-purple-300 border-purple-200/60 dark:border-purple-800/40"
+        >
           DenseNet-121
-        </span>
-        <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800/40">
+        </Badge>
+        <Badge
+          variant="outline"
+          className="px-2.5 py-1 text-xs font-semibold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300 border-emerald-200/60 dark:border-emerald-800/40"
+        >
           EfficientNet-B3
-        </span>
+        </Badge>
       </div>
     </div>
   );

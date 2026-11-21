@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
 import healthService from '../api/health.service';
 
 const BackendStatusContext = createContext({
@@ -44,8 +44,14 @@ export const BackendStatusProvider = ({ children }) => {
     pingBackend();
   }, [pingBackend]);
 
+  const contextValue = useMemo(() => ({
+    backendHealthy,
+    isWakingUp,
+    pingBackend,
+  }), [backendHealthy, isWakingUp, pingBackend]);
+
   return (
-    <BackendStatusContext.Provider value={{ backendHealthy, isWakingUp, pingBackend }}>
+    <BackendStatusContext.Provider value={contextValue}>
       {children}
     </BackendStatusContext.Provider>
   );

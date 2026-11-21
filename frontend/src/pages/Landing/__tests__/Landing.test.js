@@ -57,7 +57,7 @@ describe('Landing Page & Modular Sections Integration', () => {
     renderLanding();
 
     // Scope queries to conditions section
-    const conditionsSection = document.getElementById('conditions');
+    const conditionsSection = screen.getByTestId('conditions-section');
     expect(conditionsSection).toBeInTheDocument();
 
     // Default: All 7 conditions visible

@@ -12,6 +12,7 @@ export const SectionHeading = ({
   badgeClassName,
   align = 'center',
   children,
+  ...props
 }) => {
   const isCenter = align === 'center';
 
@@ -22,6 +23,7 @@ export const SectionHeading = ({
         isCenter ? 'text-center mx-auto' : 'text-left',
         className
       )}
+      {...props}
     >
       {badge && (
         <div

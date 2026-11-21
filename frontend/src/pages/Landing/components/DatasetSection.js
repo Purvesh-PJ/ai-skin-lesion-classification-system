@@ -21,8 +21,8 @@ export const DatasetSection = () => {
 
         {/* Minimalist Floating Stats Strip */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 py-6 border-y border-slate-200 dark:border-[#222222] mb-8">
-          {DATASET_STATS.map((stat, idx) => (
-            <div key={idx} className="flex flex-col gap-1">
+          {DATASET_STATS.map((stat) => (
+            <div key={stat.label} className="flex flex-col gap-1">
               <div className="text-[2rem] font-extrabold text-green-600 dark:text-green-400 tracking-tight leading-none">
                 {stat.value}
               </div>

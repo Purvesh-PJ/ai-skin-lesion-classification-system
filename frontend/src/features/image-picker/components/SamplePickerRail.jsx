@@ -1,5 +1,6 @@
 import React from 'react';
 import { FiZap } from 'react-icons/fi';
+import Button from '../../../components/ui/Button';
 import { SAMPLE_IMAGES } from '../constants/sampleImages';
 
 export const SamplePickerRail = ({ activeSample, onSelectSample }) => {
@@ -14,12 +15,13 @@ export const SamplePickerRail = ({ activeSample, onSelectSample }) => {
         {SAMPLE_IMAGES.map((sample) => {
           const isSelected = activeSample?.id === sample.id;
           return (
-            <button
+            <Button
               key={sample.id}
               onClick={() => onSelectSample(sample)}
               type="button"
+              variant="outline"
               title={`${sample.name} (${sample.code})`}
-              className={`flex items-center gap-2 px-2.5 py-1 rounded-xl border text-left shrink-0 transition-all duration-150 active:scale-[0.98] ${
+              className={`h-auto flex items-center gap-2 px-2.5 py-1 rounded-xl text-left shrink-0 transition-all duration-150 active:scale-[0.98] ${
                 isSelected
                   ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/30 shadow-sm'
                   : 'border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#181818] hover:border-emerald-400/80 hover:bg-neutral-50/50 dark:hover:bg-neutral-900/50'
@@ -38,7 +40,7 @@ export const SamplePickerRail = ({ activeSample, onSelectSample }) => {
                   {sample.typeLabel || sample.type}
                 </span>
               </div>
-            </button>
+            </Button>
           );
         })}
       </div>

@@ -185,10 +185,10 @@ export const HeroSection = ({ ctaRoute, ctaText }) => {
 
       {/* 4 Core Pillars of the Project */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 w-full max-w-[1040px] mt-4 relative z-10">
-        {CORE_PILLARS.map((pillar, idx) => {
+        {CORE_PILLARS.map((pillar) => {
           const PillarIcon = pillar.icon;
           return (
-            <div key={idx} className="flex items-center gap-3 py-2 text-left">
+            <div key={pillar.title} className="flex items-center gap-3 py-2 text-left">
               <div className="text-green-600 dark:text-green-400 text-xl shrink-0">
                 <PillarIcon />
               </div>
