@@ -1,7 +1,11 @@
 {
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
   "extends": [
-    "react-app",
-    "react-app/jest"
+    "react-app"
   ],
   "rules": {
     "no-console": [
@@ -89,7 +93,7 @@
       "excludedFiles": [
         "src/components/ui/**",
         "src/**/__tests__/**",
-        "src/setupTests.js"
+        "src/setupTests.*"
       ],
       "rules": {
         "no-restricted-syntax": [

@@ -1,8 +1,11 @@
+import { vi } from 'vitest';
 import { healthService } from '../index';
 import axiosInstance from '../../../lib/axios';
 
-jest.mock('../../../lib/axios', () => ({
-  get: jest.fn(),
+vi.mock('../../../lib/axios', () => ({
+  default: {
+    get: vi.fn(),
+  },
 }));
 
 describe('healthService Unit Tests', () => {

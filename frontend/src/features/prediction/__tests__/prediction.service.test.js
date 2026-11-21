@@ -1,8 +1,11 @@
+import { vi } from 'vitest';
 import { predictionService } from '../index';
 import axiosInstance from '../../../lib/axios';
 
-jest.mock('../../../lib/axios', () => ({
-  post: jest.fn(),
+vi.mock('../../../lib/axios', () => ({
+  default: {
+    post: vi.fn(),
+  },
 }));
 
 describe('predictionService Unit Tests', () => {
