@@ -1,0 +1,113 @@
+{
+  "extends": [
+    "react-app",
+    "react-app/jest"
+  ],
+  "rules": {
+    "no-console": [
+      "warn",
+      {
+        "allow": [
+          "warn",
+          "error"
+        ]
+      }
+    ],
+    "no-debugger": "error",
+    "no-var": "error",
+    "prefer-const": "error",
+    "eqeqeq": [
+      "error",
+      "always"
+    ],
+    "curly": [
+      "warn",
+      "multi-line"
+    ],
+    "object-shorthand": [
+      "warn",
+      "always"
+    ],
+    "prefer-template": "warn",
+    "no-unneeded-ternary": "warn",
+    "no-nested-ternary": "warn",
+    "spaced-comment": [
+      "warn",
+      "always",
+      {
+        "markers": [
+          "/"
+        ]
+      }
+    ],
+    "react/self-closing-comp": "warn",
+    "react/jsx-boolean-value": [
+      "warn",
+      "never"
+    ],
+    "react/jsx-no-useless-fragment": "warn",
+    "react/no-array-index-key": "warn",
+    "react/jsx-curly-brace-presence": [
+      "warn",
+      {
+        "props": "never",
+        "children": "never"
+      }
+    ],
+    "react/no-unstable-nested-components": [
+      "warn",
+      {
+        "allowAsProps": true
+      }
+    ],
+    "react/jsx-no-constructed-context-values": "warn",
+    "import/no-duplicates": "error",
+    "import/newline-after-import": "warn",
+    "import/order": [
+      "warn",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          [
+            "parent",
+            "sibling",
+            "index"
+          ]
+        ],
+        "newlines-between": "ignore"
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "src/**/*.js",
+        "src/**/*.jsx"
+      ],
+      "excludedFiles": [
+        "src/components/ui/**",
+        "src/**/__tests__/**",
+        "src/setupTests.js"
+      ],
+      "rules": {
+        "no-restricted-syntax": [
+          "warn",
+          {
+            "selector": "JSXElement[openingElement.name.name='button']",
+            "message": "Do not use native <button>. Use design system primitive <Button /> from 'components/ui' instead."
+          },
+          {
+            "selector": "JSXElement[openingElement.name.name='input']",
+            "message": "Do not use native <input>. Use design system primitive <Input /> from 'components/ui' instead."
+          },
+          {
+            "selector": "JSXElement[openingElement.name.name='select']",
+            "message": "Do not use native <select>. Use design system primitive <Dropdown /> from 'components/ui' instead."
+          }
+        ]
+      }
+    }
+  ]
+}
