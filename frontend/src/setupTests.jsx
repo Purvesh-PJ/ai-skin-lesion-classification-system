@@ -1,4 +1,10 @@
 import '@testing-library/jest-dom';
+import { vi } from 'vitest';
+
+// Compatibility shim for tests referencing global jest
+if (typeof window !== 'undefined' && typeof window.jest === 'undefined') {
+  window.jest = vi;
+}
 
 // Robust window.matchMedia mock
 window.matchMedia = window.matchMedia || function (query) {
