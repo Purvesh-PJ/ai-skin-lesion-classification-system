@@ -97,17 +97,21 @@ def check_consistency():
         else:
             print(f"  - {label:<22}: NOT FOUND")
 
-    # Audit Backend AppConfig dynamic detection
+    # Audit Backend app.py VERSION detection
     try:
-        sys.path.insert(0, os.path.join(REPO_ROOT, "backend"))
-        from app.core.config import config
-        backend_v = config.VERSION
+        app_py = os.path.join(REPO_ROOT, "backend", "app.py")
+        backend_v = None
+        with open(app_py, "r", encoding="utf-8") as f:
+            for line in f:
+                if line.startswith("VERSION ="):
+                    backend_v = line.split("=")[1].strip().strip('"').strip("'")
+                    break
         b_status = "OK" if backend_v == current else f"MISMATCH ({backend_v})"
         if backend_v != current:
             all_matched = False
-        print(f"  - {'Backend (AppConfig)':<22}: {backend_v} [{b_status}]")
+        print(f"  - {'Backend (app.py)':<22}: {backend_v} [{b_status}]")
     except Exception as e:
-        print(f"  - {'Backend (AppConfig)':<22}: Import Warning ({e})")
+        print(f"  - {'Backend (app.py)':<22}: Warning ({e})")
 
     if all_matched:
         print(f"\n[+] SUCCESS: All project manifests are 100% consistent on v{current}!\n")
@@ -152,6 +156,16 @@ def main():
         print(f" [OK] Updated package-lock.json -> {new_v}")
     if update_json_version(FRONTEND_LOCK, new_v):
         print(f" [OK] Updated frontend/package-lock.json -> {new_v}")
+
+    # 5. Update Backend app.py
+    app_py = os.path.join(REPO_ROOT, "backend", "app.py")
+    if os.path.exists(app_py):
+        with open(app_py, "r", encoding="utf-8") as f:
+            content = f.read()
+        new_content = re.sub(r'VERSION\s*=\s*["\'][^"\']+["\']', f'VERSION = "{new_v}"', content)
+        with open(app_py, "w", encoding="utf-8", newline="\n") as f:
+            f.write(new_content)
+        print(f" [OK] Updated backend/app.py -> {new_v}")
 
     print(f"\n[+] Version successfully bumped to v{new_v} across all components.")
     print(f"    - Backend dynamic config: auto-resolved to v{new_v}")

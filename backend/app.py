@@ -22,7 +22,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-VERSION = "2.1.0"
+VERSION = "3.0.0"
 
 
 def create_app(testing: bool = False) -> Flask:
