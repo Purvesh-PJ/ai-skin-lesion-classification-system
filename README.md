@@ -5,8 +5,10 @@
 **Classifying dermatoscopic skin lesions across seven diagnostic conditions using an ensemble of three deep neural networks.**
 
 [![College Project](https://img.shields.io/badge/Final%20Year-College%20Project-7c3aed.svg)](#about-this-project)
-[![Purpose](https://img.shields.io/badge/Purpose-Academic%20Demonstration-64748b.svg)](#medical-disclaimer)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-0070f3.svg?logo=vercel&logoColor=white)](https://skin-disease-detection.vercel.app)
 [![CI](https://github.com/Purvesh-PJ/skin_disease_detection/actions/workflows/ci.yml/badge.svg)](https://github.com/Purvesh-PJ/skin_disease_detection/actions/workflows/ci.yml)
+[![Tests](https://img.shields.io/badge/Tests-79%20passed-22c55e.svg)](docs/TESTING.md)
+[![Models](https://img.shields.io/badge/Models-Hugging%20Face-ffd21e.svg?logo=huggingface&logoColor=black)](https://huggingface.co/purvesh-pj/skin-disease-ensemble)
 [![License](https://img.shields.io/badge/license-Academic%20Showcase-purple.svg)](LICENSE)
 
 <br />
@@ -38,24 +40,27 @@ Details on the ensemble architectures and clinical risk tiers are in [Models](do
 
 ```mermaid
 flowchart LR
-    A["React app<br/>upload image"] -->|"POST /predict"| B["Flask API<br/>validate + OpenCV preprocess"]
-    B --> C["LiteRT models, one at a time<br/>ResNet-101, DenseNet-121, EfficientNet-B3"]
-    C --> D["Soft voting<br/>average of 3 probability vectors"]
+    A["ImagePicker<br/>pick image or sample"] -->|"POST /predict"| B["app.py & OpenCV<br/>validate + 224×224 preprocess"]
+    B --> C["LiteRT runtime<br/>ResNet-101, DenseNet-121, EfficientNet-B3"]
+    C --> D["predictor.py<br/>soft-voting probability average"]
     D -->|"JSON result"| A
-    A --> E[("Browser localStorage<br/>scan history")]
+    A --> E[("history.service<br/>save scan to localStorage")]
 ```
-
+ 
 In short:
 
-1. You upload a lesion image, or pick a sample image from the HAM10000 test set.
-2. The backend resizes and normalizes the image, then runs it through the three models one after another.
-3. The three predictions are averaged, and the most likely condition is shown with its confidence and risk level. Scan history is kept only in your browser.
+1. **Input:** `ImagePicker` takes an uploaded lesion photo or test sample and posts it to the backend (`/predict`).
+2. **Inference:** `app.py` validates the payload, OpenCV resizes/normalizes it to 224×224, and `LiteRT` executes the three models sequentially.
+3. **Consensus & History:** `predictor.py` computes the soft-voting average and clinical risk, returning the diagnosis to the UI while `history.service` saves the scan to browser `localStorage`.
 
 The detailed system diagram, step-by-step request flow, and memory strategy are in [Architecture](docs/ARCHITECTURE.md).
 
 ## Tech stack
 
-React 18, Vite, Tailwind CSS, Flask, Google LiteRT, OpenCV, TensorFlow/Keras, Docker, pytest, Vitest.
+- **Machine Learning & Vision:** Google LiteRT, TensorFlow / Keras, OpenCV
+- **Backend API:** Python, Flask, Gunicorn
+- **Frontend UI:** React 18, Vite, Tailwind CSS
+- **Testing & Infra:** pytest (Backend/ML), Vitest (Frontend), Docker
 
 ## Documentation
 
@@ -85,4 +90,8 @@ This project is developed for **academic and research demonstration only**. It i
 
 This repository is published exclusively for academic review and personal portfolio demonstration. See [LICENSE](LICENSE) for terms.
 
-© 2026 Purvesh Jathade. All rights reserved.
+© 2026 **Purvesh Jathade**. All rights reserved.
+
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/Purvesh-PJ)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://linkedin.com/in/purvesh-jathade)
+
