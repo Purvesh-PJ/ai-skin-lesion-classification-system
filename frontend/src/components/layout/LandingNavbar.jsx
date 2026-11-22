@@ -14,7 +14,7 @@ const LandingNavbar = () => {
             <FiActivity size={20} />
           </div>
           <span className="font-sans text-lg font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
-            Skin Disease AI
+            Skin Lesion AI
           </span>
         </Link>
 

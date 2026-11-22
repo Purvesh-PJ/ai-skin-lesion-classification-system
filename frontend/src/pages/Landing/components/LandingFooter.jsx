@@ -8,7 +8,7 @@ export const LandingFooter = () => {
       <Container className="flex flex-col sm:flex-row justify-between items-center flex-wrap gap-4 text-center sm:text-left">
         <div>
           <div className="font-bold text-base text-slate-900 dark:text-slate-100">
-            Skin Disease Classification Project
+            AI Skin Lesion Classification System
           </div>
           <div className="text-[0.825rem] text-slate-500 dark:text-slate-400 mt-1">
             Deep Learning Ensemble (ResNet-101 + DenseNet-121 + EfficientNet-B3) on HAM10000.
@@ -19,7 +19,7 @@ export const LandingFooter = () => {
           <span>Educational ML Project</span>
           <span>•</span>
           <a
-            href="https://github.com/Purvesh-PJ/skin_disease_detection"
+            href="https://github.com/Purvesh-PJ/ai-skin-lesion-classification-system"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1 text-green-600 dark:text-green-500 font-semibold hover:underline"

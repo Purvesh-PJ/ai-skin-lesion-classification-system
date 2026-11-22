@@ -50,7 +50,7 @@ describe('Landing Page & Modular Sections Integration', () => {
     expect(screen.getByRole('heading', { level: 2, name: /Ready to test the Ensemble Model\?/i })).toBeInTheDocument();
 
     // 8. Footer
-    expect(screen.getByText(/Skin Disease Classification Project/i)).toBeInTheDocument();
+    expect(screen.getByText(/AI Skin Lesion Classification System/i)).toBeInTheDocument();
   });
 
   test('filters conditions accurately by category', () => {

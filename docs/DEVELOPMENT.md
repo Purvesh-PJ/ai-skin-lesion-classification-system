@@ -13,8 +13,8 @@ How to run the project on your own machine. You do not need any of this to view 
 ### 1. Clone
 
 ```bash
-git clone https://github.com/Purvesh-PJ/skin_disease_detection.git
-cd skin_disease_detection
+git clone https://github.com/Purvesh-PJ/ai-skin-lesion-classification-system.git
+cd ai-skin-lesion-classification-system
 ```
 
 ### 2. Backend

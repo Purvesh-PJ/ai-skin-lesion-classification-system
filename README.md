@@ -1,12 +1,12 @@
 <div align="center">
 
-# Skin Disease Detection
+# AI Skin Lesion Classification System
 
 **Classifying dermatoscopic skin lesions across seven diagnostic conditions using an ensemble of three deep neural networks.**
 
 [![College Project](https://img.shields.io/badge/Final%20Year-College%20Project-7c3aed.svg)](#about-this-project)
 [![Live Demo](https://img.shields.io/badge/Live-Demo-0070f3.svg?logo=vercel&logoColor=white)](https://skin-disease-detection.vercel.app)
-[![CI](https://github.com/Purvesh-PJ/skin_disease_detection/actions/workflows/ci.yml/badge.svg)](https://github.com/Purvesh-PJ/skin_disease_detection/actions/workflows/ci.yml)
+[![CI](https://github.com/Purvesh-PJ/ai-skin-lesion-classification-system/actions/workflows/ci.yml/badge.svg)](https://github.com/Purvesh-PJ/ai-skin-lesion-classification-system/actions/workflows/ci.yml)
 [![Tests](https://img.shields.io/badge/Tests-79%20passed-22c55e.svg)](docs/TESTING.md)
 [![Models](https://img.shields.io/badge/Models-Hugging%20Face-ffd21e.svg?logo=huggingface&logoColor=black)](https://huggingface.co/purvesh-pj/skin-disease-ensemble)
 [![License](https://img.shields.io/badge/license-Academic%20Showcase-purple.svg)](LICENSE)

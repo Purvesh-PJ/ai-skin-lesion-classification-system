@@ -14,7 +14,7 @@ const Header = () => {
           </div>
           <div className="flex flex-col">
             <span className="font-sans font-bold text-lg leading-tight tracking-tight text-neutral-900 dark:text-neutral-100">
-              Skin Disease AI
+              Skin Lesion AI
             </span>
             <span className="text-[0.68rem] text-neutral-500 dark:text-neutral-400 font-medium hidden sm:inline">
               Ensemble Inference Studio

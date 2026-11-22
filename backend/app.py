@@ -1,6 +1,6 @@
 """
-Skin Disease Detection API
---------------------------
+AI Skin Lesion Classification API
+---------------------------------
 Lightweight, stateless Flask application serving dermatoscopic AI predictions.
 Single entrypoint for health checks and multi-model ensemble inference.
 """
@@ -50,7 +50,7 @@ def create_app(testing: bool = False) -> Flask:
         """Health check endpoint returning online status and service metadata."""
         return jsonify({
             "status": "online",
-            "service": "Skin Disease Detection API",
+            "service": "AI Skin Lesion Classification API",
             "version": VERSION
         }), 200
 

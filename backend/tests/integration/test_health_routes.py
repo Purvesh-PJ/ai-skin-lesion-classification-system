@@ -16,7 +16,7 @@ class TestHealthAndSystemRoutes:
         data = response.get_json()
         assert data is not None
         assert data["status"] == "online"
-        assert "Skin Disease Detection" in data["service"]
+        assert "AI Skin Lesion Classification" in data["service"]
         assert "version" in data
 
     def test_health_endpoint_returns_online(self, client):

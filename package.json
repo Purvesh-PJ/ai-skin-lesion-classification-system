@@ -1,8 +1,8 @@
 {
-  "name": "skin-disease-detection",
+  "name": "ai-skin-lesion-classification-system",
   "version": "3.0.0",
   "private": true,
-  "description": "Skin Disease Classification via Deep Learning Ensemble on HAM10000",
+  "description": "AI Skin Lesion Classification System via Deep Learning Ensemble on HAM10000",
   "scripts": {
     "lint": "npm run lint:frontend",
     "lint:frontend": "npm --prefix frontend run lint",

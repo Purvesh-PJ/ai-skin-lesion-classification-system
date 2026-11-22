@@ -1,7 +1,7 @@
 # Project Structure
 
 ```text
-skin_disease_detection/
+ai-skin-lesion-classification-system/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml              # GitHub Actions: test and build
