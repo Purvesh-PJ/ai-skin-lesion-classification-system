@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FiActivity, FiHome, FiCpu } from 'react-icons/fi';
+import { FiHome, FiCpu } from 'react-icons/fi';
 import ThemeToggle from '../ui/ThemeToggle';
 import { ROUTES } from '../../constants';
 
@@ -9,9 +9,11 @@ const Header = () => {
     <header className="sticky top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/90 dark:bg-[#121212]/90 flex items-center justify-between px-6 py-3 border-b border-neutral-200/80 dark:border-neutral-800/80">
       <div className="flex items-center gap-3">
         <Link to={ROUTES.HOME} className="flex items-center gap-2.5 no-underline">
-          <div className="w-8.5 h-8.5 bg-emerald-600 rounded-lg flex items-center justify-center text-white shadow-sm">
-            <FiActivity size={18} />
-          </div>
+          <img
+            src="/logo.svg"
+            alt="Skin Lesion AI Logo"
+            className="w-8 h-8 object-contain"
+          />
           <div className="flex flex-col">
             <span className="font-sans font-bold text-lg leading-tight tracking-tight text-neutral-900 dark:text-neutral-100">
               Skin Lesion AI

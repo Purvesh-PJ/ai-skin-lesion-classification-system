@@ -6,12 +6,15 @@ export const LandingFooter = () => {
   return (
     <footer className="border-t border-slate-200 dark:border-[#1f1f1f] bg-white dark:bg-[#121212] py-10">
       <Container className="flex flex-col sm:flex-row justify-between items-center flex-wrap gap-4 text-center sm:text-left">
-        <div>
-          <div className="font-bold text-base text-slate-900 dark:text-slate-100">
-            AI Skin Lesion Classification System
-          </div>
-          <div className="text-[0.825rem] text-slate-500 dark:text-slate-400 mt-1">
-            Deep Learning Ensemble (ResNet-101 + DenseNet-121 + EfficientNet-B3) on HAM10000.
+        <div className="flex items-center gap-3">
+          <img src="/logo.svg" alt="Skin Lesion AI Logo" className="w-8 h-8 object-contain" />
+          <div>
+            <div className="font-bold text-base text-slate-900 dark:text-slate-100">
+              AI Skin Lesion Classification System
+            </div>
+            <div className="text-[0.825rem] text-slate-500 dark:text-slate-400 mt-0.5">
+              Deep Learning Ensemble (ResNet-101 + DenseNet-121 + EfficientNet-B3) on HAM10000.
+            </div>
           </div>
         </div>
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FiActivity } from 'react-icons/fi';
 import { Button } from '../ui';
 import ThemeToggle from '../ui/ThemeToggle';
 import { ROUTES } from '../../constants';
@@ -10,9 +9,11 @@ const LandingNavbar = () => {
     <header className="sticky top-0 left-0 right-0 z-50 backdrop-blur-xl bg-white/90 dark:bg-[#121212]/90 border-b border-neutral-200/80 dark:border-neutral-800/80 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
         <Link to={ROUTES.HOME} className="flex items-center gap-2.5 no-underline">
-          <div className="w-9 h-9 bg-emerald-600 rounded-lg flex items-center justify-center text-white shadow-sm">
-            <FiActivity size={20} />
-          </div>
+          <img
+            src="/logo.svg"
+            alt="Skin Lesion AI Logo"
+            className="w-9 h-9 object-contain"
+          />
           <span className="font-sans text-lg font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
             Skin Lesion AI
           </span>

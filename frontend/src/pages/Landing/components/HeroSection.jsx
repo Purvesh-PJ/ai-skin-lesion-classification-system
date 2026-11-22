@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FiCpu } from 'react-icons/fi';
 import Button from '../../../components/ui/Button';
 import { CORE_PILLARS } from '../constants/landingData';
 
@@ -18,8 +17,8 @@ export const HeroSection = ({ ctaRoute, ctaText }) => {
       <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-8 items-center w-full max-w-[1240px] relative z-10 mb-8 text-center lg:text-left">
         {/* Left Column: Hero Content */}
         <div className="flex flex-col items-center lg:items-start">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white dark:bg-[#181818] border border-green-200 dark:border-green-500/30 rounded-full text-green-700 dark:text-green-400 text-[0.8125rem] font-semibold mb-5 shadow-sm relative z-10">
-            <FiCpu size={14} />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white dark:bg-[#181818] border border-green-200 dark:border-green-500/30 rounded-full text-green-700 dark:text-green-400 text-[0.8125rem] font-semibold mb-5 shadow-sm relative z-10">
+            <img src="/logo.svg" alt="Skin Lesion AI Logo" className="w-4 h-4 object-contain" />
             <span>Dermatological AI Research • Ensemble Deep Learning</span>
           </div>
 

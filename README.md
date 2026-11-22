@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="docs/assets/logo.svg" alt="AI Skin Lesion Classification System Logo" width="100" height="100" />
+
 # AI Skin Lesion Classification System
 
 **Classifying dermatoscopic skin lesions across seven diagnostic conditions using an ensemble of three deep neural networks.**
