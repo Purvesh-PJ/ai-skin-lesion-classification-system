@@ -19,13 +19,16 @@
 
 This is my final-year project (project phase) for my B.Tech in Computer Science. It is shared here for viewing and demonstration.
 
-## What the project covers
+The project explores dermatoscopic skin lesion classification using deep learning, focusing on three core areas:
+- **Machine learning:** three ImageNet-pretrained models (ResNet-101, DenseNet-121, EfficientNet-B3) fine-tuned on the HAM10000 dataset and combined by averaging their predictions.
+- **Inference & UI:** a lightweight Flask API and React frontend for uploading lesion images and testing predictions directly.
+- **Engineering practice:** 79 automated tests, a CI workflow, and written architecture decision records.
 
-- **Machine learning:** three models (ResNet-101, DenseNet-121, EfficientNet-B3) trained on the HAM10000 dataset and combined by averaging their predictions.
-- **Web application:** a React frontend and a Flask API that returns a predicted condition, a confidence score, and a risk level.
-- **Engineering practice:** automated tests, a CI workflow, and written architecture decision records.
+**Target Conditions (HAM10000):**
+- **Malignant & Pre-Cancerous:** Melanoma (`mel`), Basal Cell Carcinoma (`bcc`), Actinic Keratoses (`akiec`)
+- **Benign & Non-Cancerous:** Melanocytic Nevi (`nv`), Benign Keratoses (`bkl`), Dermatofibroma (`df`), Vascular Lesions (`vasc`)
 
-The seven conditions it distinguishes are melanoma, basal cell carcinoma, actinic keratoses, vascular lesions, benign keratosis-like lesions, dermatofibroma, and melanocytic nevi. Details are in [Models](docs/MODEL.md).
+Details on the ensemble architectures and clinical risk tiers are in [Models](docs/MODEL.md).
 
 ## Preview
 
