@@ -1,25 +1,23 @@
+<div align="center">
+
 # Skin Disease Detection
 
-**A final-year college project: classifying dermatoscopic skin lesions into seven categories using an ensemble of three deep neural networks.**
+**Classifying dermatoscopic skin lesions across seven diagnostic conditions using an ensemble of three deep neural networks.**
 
 [![College Project](https://img.shields.io/badge/Final%20Year-College%20Project-7c3aed.svg)](#about-this-project)
 [![Purpose](https://img.shields.io/badge/Purpose-Academic%20Demonstration-64748b.svg)](#medical-disclaimer)
 [![CI](https://github.com/Purvesh-PJ/skin_disease_detection/actions/workflows/ci.yml/badge.svg)](https://github.com/Purvesh-PJ/skin_disease_detection/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/license-Academic%20Showcase-purple.svg)](LICENSE)
 
-![Landing page of the Skin Disease Detection app](frontend/public/screenshots/landing_hero.png)
+<br />
+
+<img src="frontend/public/screenshots/landing_hero.png" alt="Landing page of the Skin Disease Detection app" width="100%" />
+
+</div>
 
 ## About this project
 
-This is my final-year project (project phase) for my B.Tech in Computer Science. It is shared here for viewing and demonstration. A hosted demo is available if you just want to see it working, and if you would like to run it on your own machine, the steps are in the [Development Guide](docs/DEVELOPMENT.md).
-
-- [Hosted demo](https://skin-disease-detection.vercel.app)
-- [API health check](https://skin-disease-detection-6kxm.onrender.com/health)
-- [Trained model files on Hugging Face](https://huggingface.co/purvesh-pj/skin-disease-ensemble)
-
-## Medical disclaimer
-
-This project was built for **academic and research demonstration only**. It is not a certified medical device and must not replace professional dermatological evaluation or biopsy.
+This is my final-year project (project phase) for my B.Tech in Computer Science. It is shared here for viewing and demonstration.
 
 ## What the project covers
 
@@ -71,6 +69,16 @@ React 18, Vite, Tailwind CSS, Flask, Google LiteRT, OpenCV, TensorFlow/Keras, Do
 | [ML Pipeline](docs/ML_PIPELINE.md) | Dataset setup, training, and model export |
 | [Testing](docs/TESTING.md) | Test suites and how to run them |
 | [Decision Records](docs/adr/README.md) | Why key technical choices were made |
+
+## Live Demo
+
+- **Hosted Web App**: [https://skin-disease-detection.vercel.app](https://skin-disease-detection.vercel.app)
+- **API Health Check**: [https://skin-disease-detection-6kxm.onrender.com/health](https://skin-disease-detection-6kxm.onrender.com/health)
+- **Trained Model Checkpoints**: [Hugging Face Model Hub](https://huggingface.co/purvesh-pj/skin-disease-ensemble)
+
+## Medical Disclaimer
+
+This project is developed for **academic and research demonstration only**. It is not certified as a clinical medical device and must not replace professional dermatological evaluation or biopsy.
 
 ## License
 
