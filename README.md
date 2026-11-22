@@ -5,7 +5,7 @@
 [![College Project](https://img.shields.io/badge/Final%20Year-College%20Project-7c3aed.svg)](#about-this-project)
 [![Purpose](https://img.shields.io/badge/Purpose-Academic%20Demonstration-64748b.svg)](#medical-disclaimer)
 [![CI](https://github.com/Purvesh-PJ/skin_disease_detection/actions/workflows/ci.yml/badge.svg)](https://github.com/Purvesh-PJ/skin_disease_detection/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-Academic%20Showcase-purple.svg)](LICENSE)
 
 ![Landing page of the Skin Disease Detection app](frontend/public/screenshots/landing_hero.png)
 
@@ -74,4 +74,6 @@ React 18, Vite, Tailwind CSS, Flask, Google LiteRT, OpenCV, TensorFlow/Keras, Do
 
 ## License
 
-[MIT](LICENSE) · Purvesh Jathade
+This repository is published exclusively for academic review and personal portfolio demonstration. See [LICENSE](LICENSE) for terms.
+
+© 2026 Purvesh Jathade. All rights reserved.

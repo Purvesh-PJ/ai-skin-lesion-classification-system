@@ -1,21 +1,18 @@
-MIT License
+Academic Showcase License
 
-Copyright (c) 2026 Purvesh-PJ
+Copyright (c) 2026 Purvesh Jathade. All rights reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+This repository and its contents are published exclusively for personal portfolio demonstration, academic review, and educational evaluation purposes as a B.Tech final-year project.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+PERMITTED USES:
+- Viewing, inspecting, and reviewing the source code for evaluation, hiring, or academic assessment.
+- Running the software locally or exploring the hosted demo for personal evaluation.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+RESTRICTIONS:
+- No permission is granted to copy, reproduce, fork, modify, redistribute, or re-publish this code (in whole or in part) as personal coursework, academic submissions, or commercial products.
+- Unauthorized re-submission or representing any portion of this project as original work by another individual or entity is strictly prohibited.
+
+DISCLAIMER:
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+THIS SYSTEM IS DEVELOPED FOR ACADEMIC AND RESEARCH DEMONSTRATION PURPOSES ONLY AND IS NOT CERTIFIED AS A CLINICAL MEDICAL DIAGNOSTIC DEVICE.
