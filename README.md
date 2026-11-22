@@ -13,6 +13,10 @@
 
 <img src="frontend/public/screenshots/landing_hero.png" alt="Landing page of the Skin Disease Detection app" width="100%" />
 
+| Diagnostic Studio | Scan History | Sample Picker |
+| :---------------: | :----------: | :-----------: |
+| ![Prediction dashboard](frontend/public/screenshots/dashboard_prediction.png) | ![History audit log](frontend/public/screenshots/history_audit.png) | ![HAM10000 sample selector](frontend/public/screenshots/sample_picker.png) |
+
 </div>
 
 ## About this project
@@ -30,13 +34,7 @@ The project explores dermatoscopic skin lesion classification using deep learnin
 
 Details on the ensemble architectures and clinical risk tiers are in [Models](docs/MODEL.md).
 
-## Preview
-
-| Diagnostic studio | Scan history | Sample picker |
-| :---------------: | :----------: | :-----------: |
-| ![Prediction dashboard](frontend/public/screenshots/dashboard_prediction.png) | ![History audit log](frontend/public/screenshots/history_audit.png) | ![HAM10000 sample selector](frontend/public/screenshots/sample_picker.png) |
-
-## System design
+## How it works
 
 ```mermaid
 flowchart LR
